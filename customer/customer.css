@@ -6,6 +6,10 @@ body {
   line-height: 1.7;
 }
 
+h1{
+  font-size: 200%;
+}
+
 .main-header {
   background: linear-gradient(to bottom right, #1c1c2c, #2f2f3d);
   color: #f6f4ef;
