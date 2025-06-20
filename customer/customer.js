@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".nav-card");
-  cards.forEach(card => {
-    card.addEventListener("mouseover", () => {
-      card.classList.add("hovering");
-    });
-    card.addEventListener("mouseout", () => {
-      card.classList.remove("hovering");
-    });
+  const links = document.querySelectorAll(".nav-link");
+  links.forEach(link => {
+    link.addEventListener("mouseenter", () => link.classList.add("hovering"));
+    link.addEventListener("mouseleave", () => link.classList.remove("hovering"));
   });
 });
