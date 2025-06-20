@@ -80,3 +80,100 @@ footer a {
   border-radius: 0.5rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
+
+.class-products, .sponsors, .event-list {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.class-pr {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.sponsor-list {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.sponsor-list li {
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.class-directory {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.class-card {
+  text-decoration: none;
+  background: #fff;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  color: #222;
+}
+
+.class-card:hover {
+  transform: translateY(-4px);
+}
+
+.class-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.class-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.product-detail {
+  max-width: 700px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.product-image {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
