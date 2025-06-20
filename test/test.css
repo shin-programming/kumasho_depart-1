@@ -1,44 +1,84 @@
-/* home_style.css */
+/* ベース設定 */
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: 'Playfair Display', serif;
   margin: 0;
   padding: 0;
+  background-color: #faf8f5;
+  color: #333;
 }
 
 header {
-  background-color: #f5c242;
-  color: white;
+  background-color: #1e1e1e;
+  color: #e0c080;
   text-align: center;
-  padding: 1em;
+  padding: 1.2em;
+}
+
+h1 {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+nav {
+  background-color: #f7f3eb;
 }
 
 nav ul {
   display: flex;
   justify-content: space-around;
-  background-color: #fff0d6;
   list-style: none;
+  padding: 1em 0;
   margin: 0;
-  padding: 0.5em 0;
+  flex-wrap: wrap;
 }
 
 nav ul li a {
-  color: #333;
   text-decoration: none;
-  font-weight: bold;
+  color: #5a452a;
+  font-weight: 600;
 }
 
 nav ul li a:hover {
-  color: #f5a623;
+  border-bottom: 2px solid #b1976b;
 }
 
 main {
-  padding: 1.5em;
+  padding: 2em 1em;
+  text-align: center;
+}
+
+.welcome {
+  background-color: #fffdf8;
+  border-top: 2px solid #e2d4b7;
+  border-bottom: 2px solid #e2d4b7;
+  padding: 2em 1em;
+  font-size: 1.2em;
 }
 
 footer {
+  background-color: #e6e1d9;
   text-align: center;
   padding: 1em;
-  background-color: #eee;
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* モバイル対応 */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 0.5em 0;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .welcome {
+    font-size: 1.1em;
+  }
 }
