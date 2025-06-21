@@ -18,7 +18,7 @@ document.querySelectorAll('.show-status').forEach(button => {
             `<div class="item">
                <strong>${item["商品名"]}</strong><br>
                価格: ¥${item["価格"]}<br>
-               状況: ${item["販売状況"]}
+               販売状況: ${item["販売状況"]}<br>
              </div>`
           ).join('');
         }
