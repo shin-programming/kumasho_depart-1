@@ -118,7 +118,7 @@
             document.getElementById('loading').style.display = 'flex'; // ローディング表示
             const classValue = document.getElementById('class').value;
             const password = document.getElementById('password').value;
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbxFGquLcmts6dmnbvovF3DEsgVsTrNZ36O5MjIzXfFBtTswStfUIbH8bw5kkpdWvmzomw/exec';
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbzny_mCRK8DFviF0oAf8zI0htDXQBFeCtdrD9sKk0AtG2YKPf48mHP9Jx4bMEN-gBzu_Q/exec';
             try {
                 const res = await fetch(GAS_URL);
                 if (!res.ok) {
@@ -126,9 +126,16 @@
                 }
                 const users = await res.json();
                 if (Array.isArray(users)) {
-                    // パスワードの前後空白除去＆型変換で厳密比較
-                    const found = users.find(u => String(u['class']) == String(classValue) && String(u.password).trim() == String(password).trim());
-                    if (found) {
+                    // デバッグ用ログを追加
+                    console.log('users:', users);
+                    console.log('classValue:', classValue, 'password:', password);
+                    users.forEach((u, i) => {
+                        console.log(`user[${i}]: class=${u['class']} password=${u.password}`);
+                    });
+                    // findで一致ユーザーを取得
+                    const found = users.find(u => String(u['class']).trim() === String(classValue).trim() && String(u.password).trim() === String(password).trim());
+                    console.log('found:', found);
+                    if (found !== undefined) {
                         localStorage.setItem(`isLoggedIn${classValue}`, 'true');
                         window.location.href = `../class/${classValue}.html`;
                         // ローディング非表示は不要（遷移するため）
@@ -140,7 +147,7 @@
                 if (!Array.isArray(users)) {
                     alert('ユーザーデータの取得に失敗しました');
                 } else {
-                    alert('パスワードが違います');
+                    alert("パスワードが違います");
                 }
             } catch (err) {
                 document.getElementById('loading').style.display = 'none';
@@ -151,6 +158,12 @@
         // ページ表示時にローディングマークを必ず非表示にする
         window.addEventListener('DOMContentLoaded', function() {
             document.getElementById('loading').style.display = 'none';
+            // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除
+            for (let g = 1; g <= 3; g++) {
+                for (let c = 1; c <= 9; c++) {
+                    localStorage.removeItem(`isLoggedIn${g}${c < 10 ? c : ''}${c}`);
+                }
+            }
         });
         </script>
     </div>
