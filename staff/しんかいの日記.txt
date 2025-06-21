@@ -3,3 +3,4 @@ staffフォルダ
         passwordフォルダ
         pictureフォルダ
     sold-out_reportフォルダ
+    頑張ってるよ
