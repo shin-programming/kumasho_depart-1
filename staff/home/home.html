@@ -109,20 +109,28 @@
             const password = document.getElementById('password').value;
 
             // Google Apps ScriptのWebアプリURL
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbzTWuCWqPdRCQOhqTnTo3J6orkXeaVKcoi5jqMtfn5W8vGxK43RqV6BgVGXJbgqLRKP/exec';
+            const GAS_URL = 'https://script.google.com/a/macros/g.bears.ed.jp/s/AKfycbx_eTAcrAGOqImxLPWuyZvUr4oYoPtx5HGayWQNoOdTrNfvBdNbz0J0Tubm7Mf8KgzCcA/exec';
             try {
                 const res = await fetch(GAS_URL);
+                if (!res.ok) {
+                    throw new Error('ネットワークエラー');
+                }
                 const users = await res.json();
-                // classとpasswordのみで照合
-                const found = users.find(u => u.class == classValue && u.password == password);
-                if (found) {
-                    // クラスIDに応じたページへ遷移
-                    window.location.href = `staff/class/${classValue}.html`;
+                // usersが配列であることを確認
+                if (Array.isArray(users)) {
+                    // classとpasswordのみで照合
+                    const found = users.find(u => u.class == classValue && u.password == password);
+                    if (found) {
+                        // クラスIDに応じたページへ遷移
+                        window.location.href = `./class/${classValue}.html`;
+                    } else {
+                        alert('パスワードが違います');
+                    }
                 } else {
-                    alert('パスワードが違います');
+                    alert('ユーザーデータの取得に失敗しました');
                 }
             } catch (err) {
-                alert('サーバーに接続できませんでした');
+                alert('サイトにアクセスできませんでした');
             }
         });
         </script>
