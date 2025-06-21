@@ -8,15 +8,95 @@
 <body>
     <div class="container">
         <h1>熊商デパート 関係者ログイン</h1>
-        <form class="login-form">
-            <div class="form-group">
-                <label for="userId">ID</label>
-                <input type="text" id="userId" name="userId" required>
-            </div>
-            <div class="form-group">
-                <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+        <form>
+            <table align="center">
+                <tr>
+                    <td><label for="id">学年</label></td>
+                    <td>
+                        <div>    <!--学年選択のラジオボタン-->
+                            <label><input type="radio" name="grade" value="1" checked>1年</label>
+                            <label><input type="radio" name="grade" value="2">2年</label>
+                            <label><input type="radio" name="grade" value="3">3年</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="class">クラス</label></td>
+                    <td>
+                        <select id="class" name="class" required>
+                            <!-- オプションはJavaScriptによって追加されます -->
+                        </select>
+
+                        <!--ここからJavaScript-->
+                        <script>    // 学年ごとのクラス選択肢を追加
+                        const classOptions = {
+                            1: [
+                                { value: "11", text: "1-1" },
+                                { value: "12", text: "1-2" },
+                                { value: "13", text: "1-3" },
+                                { value: "14", text: "1-4" },
+                                { value: "15", text: "1-5" },
+                                { value: "16", text: "1-6" },
+                                { value: "17", text: "1-7" },
+                                { value: "18", text: "1-8" },
+                                { value: "19", text: "1-9" }
+                            ],
+                            2: [
+                                { value: "21", text: "2-1" },
+                                { value: "22", text: "2-2" },
+                                { value: "23", text: "2-3" },
+                                { value: "24", text: "2-4" },
+                                { value: "25", text: "2-5" },
+                                { value: "26", text: "2-6" },
+                                { value: "27", text: "2-7" },
+                                { value: "28", text: "2-8" },
+                                { value: "29", text: "2-9" }
+                            ],
+                            3: [
+                                { value: "31", text: "3-1" },
+                                { value: "32", text: "3-2" },
+                                { value: "33", text: "3-3" },
+                                { value: "34", text: "3-4" },
+                                { value: "35", text: "3-5" },
+                                { value: "36", text: "3-6" },
+                                { value: "37", text: "3-7" },
+                                { value: "38", text: "3-8" },
+                                { value: "39", text: "3-9" }
+                            ]
+                        };
+
+                        // 選択された学年に応じてクラスの選択肢を更新する関数
+                        function updateClassOptions(grade) {
+                            // クラス選択用の<select>要素を取得
+                            const select = document.getElementById('class');
+                            // 既存の選択肢をクリアし、デフォルトの選択肢を追加
+                            select.innerHTML = '<option value="" disabled selected>クラスを選択</option>';
+                            // 指定された学年のクラス一覧をループして<option>要素を追加
+                            classOptions[grade].forEach(opt => {
+                                const option = document.createElement('option');
+                                option.value = opt.value;      // クラスの値を設定
+                                option.textContent = opt.text; // クラスの表示名を設定
+                                select.appendChild(option);    // <select>に追加
+                            });
+                        }
+
+                        // 学年ラジオボタンの変更イベントを監視し、選択時にクラス選択肢を更新
+                        document.querySelectorAll('input[name="grade"]').forEach(radio => {
+                            radio.addEventListener('change', function() {
+                                updateClassOptions(this.value); //関数呼び出し
+                            });
+                        });
+
+                        // ページ初期表示時、選択されている学年に応じてクラス選択肢を初期化
+                        updateClassOptions(document.querySelector('input[name="grade"]:checked').value);
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="password">パスワード</label></td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+            </table>
             <button type="submit" class="main-btn">ログイン</button>
         </form>
     </div>
