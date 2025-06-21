@@ -121,6 +121,7 @@
                     // classとpasswordのみで照合
                     const found = users.find(u => u.class == classValue && u.password == password);
                     if (found) {
+                        localStorage.setItem(`isLoggedIn${classValue}`, 'true');
                         // クラスIDに応じたページへ遷移
                         window.location.href = `../class/${classValue}.html`;
                     } else {

@@ -17,5 +17,12 @@
         <p>ここでは、１年２組の生徒が運営する店舗の情報や商品を管理します。</p>
         <p>詳細な情報は、各商品ページをご覧ください。</p>
     </div>
+    <button onclick="window.location.href='../home/home.html'" class="logout-button">ログアウト</button>
+    <script>
+      // ログアウト処理
+      document.querySelector('.logout-button').addEventListener('click', function() {
+          localStorage.removeItem('isLoggedIn12');
+      });
+    </script>
 </body>
 </html>
