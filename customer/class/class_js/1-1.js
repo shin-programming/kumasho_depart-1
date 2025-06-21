@@ -14,13 +14,14 @@ document.querySelectorAll('.show-status').forEach(button => {
         if (data.error) {
           modalBody.innerHTML = `<p style="color:red;">${data.error}</p>`;
         } else {
-          modalBody.innerHTML = data.map(item =>
-            `<div class="item">
-               <strong>${item["商品名"]}</strong><br>
-               価格: ¥${item["価格"]}<br>
-               販売状況: ${item["販売状況"]}<br>
-             </div>`
-          ).join('');
+          modalBody.innerHTML = data.map(item => {
+            const isSoldOut = item["販売状況"] === "完売";
+            return `<div class="item" style="margin-bottom: 16px;">
+                      <strong>${item["商品名"]}</strong><br>
+                      価格: ¥${item["価格"]}<br>
+                      販売状況: <span style="color:${isSoldOut ? 'red' : 'black'};">${item["販売状況"]}</span><br>
+                    </div>`;
+          }).join('');
         }
       })
       .catch(error => {
