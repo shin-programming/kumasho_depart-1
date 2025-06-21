@@ -7,10 +7,24 @@
     </head>
     <body>
         <div class="tab-bar">
-            <h1>３年９組　【店舗名】</h1>
+            <h1 style="margin: 0;">３年９組　【店舗名】</h1>
             <button class="logout-button">ログアウト</button>
         </div>
+        <div id="product-count-area" style="text-align:right;margin:8px 16px 0 0;font-weight:bold;">
+            商品数：<span id="product-count">0</span>
+            <br>完売数：<span id="sold-count">0</span>
+        </div>
+        <div id="loading" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;">
+            <div class="spinner" style="border:8px solid #eee;border-top:8px solid #2196f3;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
+        </div>
+        <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
         <script>
+            const className = "3-9";
             // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
             if (!localStorage.getItem('isLoggedIn39')) {
                 window.location.href = '../home/home.html';
@@ -20,6 +34,18 @@
                 localStorage.removeItem('isLoggedIn39');
                 window.location.href = '../home/home.html';
             });
+            // ローディング表示
+            document.getElementById('loading').style.display = 'flex';
+            const gas_url = "https://script.google.com/macros/s/AKfycbxdK76UX5J8z7hCXH9s5bj8rUkVV5i7QSf5X1A_LNcjMd4l_cM_ZHHKWBo4T4RCG3xTSw/exec"
+            fetch(gas_url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("product-count").textContent = data[0].pd;
+                    document.getElementById("sold-count").textContent = data[0].sold_out;
+                })
+                .finally(() => {
+                    document.getElementById('loading').style.display = 'none';
+                });
         </script>
     </body>
 </html>

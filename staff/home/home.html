@@ -118,7 +118,7 @@
             document.getElementById('loading').style.display = 'flex'; // ローディング表示
             const classValue = document.getElementById('class').value;
             const password = document.getElementById('password').value;
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpCF1dnHQZ0oGtziiv5Hya5SSFSxSlcCxGtqgZn7tYUrpA8QIDPCb4Nfia_m57ddi3Bg/exec';
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbxFGquLcmts6dmnbvovF3DEsgVsTrNZ36O5MjIzXfFBtTswStfUIbH8bw5kkpdWvmzomw/exec';
             try {
                 const res = await fetch(GAS_URL);
                 if (!res.ok) {
@@ -126,7 +126,8 @@
                 }
                 const users = await res.json();
                 if (Array.isArray(users)) {
-                    const found = users.find(u => u.class == classValue && u.password == password);
+                    // パスワードの前後空白除去＆型変換で厳密比較
+                    const found = users.find(u => String(u['class']) == String(classValue) && String(u.password).trim() == String(password).trim());
                     if (found) {
                         localStorage.setItem(`isLoggedIn${classValue}`, 'true');
                         window.location.href = `../class/${classValue}.html`;
