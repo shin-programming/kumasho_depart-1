@@ -101,34 +101,28 @@
         </form>
         <script>
         // ログイン処理
-        // フォーム送信時のイベントリスナーを追加
         document.querySelector('form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // デフォルトのフォーム送信をキャンセル
-
-            // 選択された学年を取得
-            const grade = document.querySelector('input[name="grade"]:checked').value;
+            e.preventDefault();
             // 選択されたクラスを取得
             const classValue = document.getElementById('class').value;
             // 入力されたパスワードを取得
             const password = document.getElementById('password').value;
 
             // Google Apps ScriptのWebアプリURL
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbyG9hpq0z_HhuXl6_NT3W3eDzvXMe0McMga-2RJIHpyN4Ov7xG4f8_b-B0ly10hMyqcag/exec';
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbzTWuCWqPdRCQOhqTnTo3J6orkXeaVKcoi5jqMtfn5W8vGxK43RqV6BgVGXJbgqLRKP/exec';
             try {
-            // GASにリクエストを送信
-            const res = await fetch(GAS_URL);
-            // レスポンスをJSONとして取得
-            const users = await res.json();
-            // 入力情報と一致するユーザーを検索
-            const found = users.find(u => u.grade == grade && u.class == classValue && u.password == password);
-            if (found) {
-                alert('ログイン成功！'); // ログイン成功時の処理
-                // ここにログイン後の処理を書く
-            } else {
-                alert('パスワードが違います'); // ログイン失敗時の処理
-            }
+                const res = await fetch(GAS_URL);
+                const users = await res.json();
+                // classとpasswordのみで照合
+                const found = users.find(u => u.class == classValue && u.password == password);
+                if (found) {
+                    // クラスIDに応じたページへ遷移
+                    window.location.href = `staff/class/${classValue}.html`;
+                } else {
+                    alert('パスワードが違います');
+                }
             } catch (err) {
-            alert('サーバーに接続できませんでした'); // 通信エラー時の処理
+                alert('サーバーに接続できませんでした');
             }
         });
         </script>
