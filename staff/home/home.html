@@ -109,7 +109,7 @@
             const password = document.getElementById('password').value;
 
             // Google Apps ScriptのWebアプリURL
-            const GAS_URL = 'https://script.google.com/a/macros/g.bears.ed.jp/s/AKfycbx_eTAcrAGOqImxLPWuyZvUr4oYoPtx5HGayWQNoOdTrNfvBdNbz0J0Tubm7Mf8KgzCcA/exec';
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbwpCF1dnHQZ0oGtziiv5Hya5SSFSxSlcCxGtqgZn7tYUrpA8QIDPCb4Nfia_m57ddi3Bg/exec';
             try {
                 const res = await fetch(GAS_URL);
                 if (!res.ok) {
@@ -122,7 +122,7 @@
                     const found = users.find(u => u.class == classValue && u.password == password);
                     if (found) {
                         // クラスIDに応じたページへ遷移
-                        window.location.href = `./class/${classValue}.html`;
+                        window.location.href = `../class/${classValue}.html`;
                     } else {
                         alert('パスワードが違います');
                     }
