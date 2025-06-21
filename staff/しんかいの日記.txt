@@ -1,3 +1,5 @@
 staffフォルダ
     homeフォルダ
-        ・
+        passwordフォルダ
+        pictureフォルダ
+    sold-out_reportフォルダ
