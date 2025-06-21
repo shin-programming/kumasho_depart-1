@@ -3,39 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>熊商デパート ３年９組店舗ページ</title>
-        <link rel="stylesheet" href="home_style.css">
-        <style>
-            .tab-bar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background: #fff;
-                border-bottom: 1px solid #ccc;
-                display: flex;
-                justify-content: flex-start;
-                z-index: 1000;
-            }
-            .tab-bar button {
-                background: none;
-                border: none;
-                padding: 16px 24px;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: background 0.2s;
-            }
-            .tab-bar button:hover {
-                background: #f0f0f0;
-            }
-            body {
-                margin-top: 56px; /* タブバーの高さ分だけ下げる */
-            }
-        </style>
+        <link rel="stylesheet" href="class_style.css">
     </head>
     <body>
         <div class="tab-bar">
             <h1>３年９組　【店舗名】</h1>
-            <button style="text-align: right;" class="logout-button">ログアウト</button>
+            <button class="logout-button">ログアウト</button>
         </div>
         <script>
             // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
