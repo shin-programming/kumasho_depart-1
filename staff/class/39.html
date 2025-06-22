@@ -41,9 +41,9 @@
                 document.getElementById('loading').style.display = 'flex';
                 const className = "3-9";
                 // GET用（初期データ取得）
-                const gas_url = "https://script.google.com/macros/s/AKfycbwX9IxU0Hj1F2ab2TfX9Fe20zMIlzF2zrhBE5aG3rb9Uw9bKuCwELbJ1dThhafvNRrGlA/exec?sheet=" + encodeURIComponent(className);
+                const gas_url = "https://script.google.com/macros/s/AKfycbzKU_3wH7nrO-jCdCh6d4nF2NvRdDPyQKwYEnpQhwFCoyggh5ufvAK1cQf74lyE7M67/exec?sheet=" + encodeURIComponent(className);
                 // POST用（販売状況更新）
-                const gas_post_url = "https://script.google.com/macros/s/AKfycbwX9IxU0Hj1F2ab2TfX9Fe20zMIlzF2zrhBE5aG3rb9Uw9bKuCwELbJ1dThhafvNRrGlA/exec";
+                const gas_post_url = "https://script.google.com/macros/s/AKfycbzKU_3wH7nrO-jCdCh6d4nF2NvRdDPyQKwYEnpQhwFCoyggh5ufvAK1cQf74lyE7M67/exec";
                 fetch(gas_url)
                     .then(response => response.json())
                     .then(data => {
@@ -64,17 +64,20 @@
                             const tr = document.createElement('tr');
                             // 販売状況のクラス分岐
                             let statusClass = '';
+                            // 商品名の前後空白を除去して比較用に格納
+                            const pdname = (item.pdname || '').trim();
                             const isSoldout = (item.sales || '').trim() === '完売';
                             statusClass = isSoldout ? 'status-soldout' : 'status-on-sale';
                             // チェックボックスHTML
-                            const checkbox = `<input type="checkbox" class="status-checkbox" data-pdname="${item.pdname}" ${isSoldout ? 'checked' : ''}>`;
-                            tr.innerHTML = `<td>${item.pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price || '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
+                            const checkbox = `<input type="checkbox" class="status-checkbox" data-pdname="${pdname}" ${isSoldout ? 'checked' : ''}>`;
+                            tr.innerHTML = `<td>${pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price || '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
                             tbody.appendChild(tr);
                         });
                         // チェックボックスイベント登録
                         tbody.querySelectorAll('.status-checkbox').forEach(cb => {
                             cb.addEventListener('change', function() {
-                                const pdname = this.getAttribute('data-pdname');
+                                // 商品名の前後空白を除去して送信
+                                const pdname = (this.getAttribute('data-pdname') || '').trim();
                                 const newStatus = this.checked ? '完売' : '販売中';
                                 // ラベルも即時切り替え
                                 this.nextElementSibling.textContent = newStatus;

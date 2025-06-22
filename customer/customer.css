@@ -265,6 +265,97 @@ footer a {
   color: #d4af37; /* 他要素と揃えたアクセントカラーに */
 }
 
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('img/big.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* 文字の可読性向上 */
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin: 0;
+  text-shadow: 1px 1px 5px #000;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #ffd700;
+  margin-top: 0.8rem;
+}
+
+/* スクロール時のセクションフェード効果 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 以下は既存スタイルに合わせる */
+.intro, .vertical-nav {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.nav-link {
+  background: #fff;
+  color: #1c1c2c;
+  padding: 1rem 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #e0ddd7;
+  width: 80%;
+  max-width: 400px;
+  margin-bottom: 1rem;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #f3f1ed;
+  transform: translateY(-2px);
+  border-color: #d4af37;
+}
+
+footer {
+  text-align: center;
+  background-color: #1c1c2c;
+  color: #ddd;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #d4af37;
+  text-decoration: none;
+}
+
 :root {
   --bg-color: #f9f7f2;
   --text-color: #333;
