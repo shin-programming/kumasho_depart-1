@@ -97,6 +97,7 @@
                     <td><input type="password" id="password" name="password" required></td>
                 </tr>
             </table>
+            <br>
             <button type="submit" class="main-btn">ログイン</button>
         </form>
 
@@ -104,66 +105,60 @@
         <div id="loading" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;">
             <div style="border:8px solid #f3f3f3;border-top:8px solid #3498db;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
         </div>
-        <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        </style>
-
+        
         <script>
-        // ログイン処理
-        document.querySelector('form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            document.getElementById('loading').style.display = 'flex'; // ローディング表示
-            const classValue = document.getElementById('class').value;
-            const password = document.getElementById('password').value;
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbzny_mCRK8DFviF0oAf8zI0htDXQBFeCtdrD9sKk0AtG2YKPf48mHP9Jx4bMEN-gBzu_Q/exec';
+        // フォームの送信（ログインボタンが押されたとき）を監視する
+        document.querySelector('form').addEventListener('submit', async function(p) {
+            p.preventDefault(); // フォームの標準の動作（ページ遷移）を止める
+            document.getElementById('loading').style.display = 'flex'; // ローディング画面（ぐるぐる）を表示する
+            const classValue = document.getElementById('class').value; // クラスの選択値を取得 例: "39"（3年9組）
+            const password = document.getElementById('password').value; // パスワードの入力値を取得 例: "furukawagumi"
+            const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_Ttxeg35Rwh1IJTX2ZFNzPyJ6ebHS5QpCQpfRDujqPU-S5XR9Ulv-Mn4z8oQd2yoe/exec'; // データ取得用のURL
             try {
-                const res = await fetch(GAS_URL);
-                if (!res.ok) {
-                    throw new Error('ネットワークエラー');
+                const res = await fetch(GAS_URL); // URLにアクセスしてデータをもらう（終わるまで待つ） 例: レスポンスオブジェクト
+                if (!res.ok) { // もしネットワークエラーなどで失敗したら
+                    throw new Error('ネットワークエラー'); // エラーを発生させてcatchに飛ばす
                 }
-                const users = await res.json();
-                if (Array.isArray(users)) {
-                    // デバッグ用ログを追加
-                    console.log('users:', users);
-                    console.log('classValue:', classValue, 'password:', password);
-                    users.forEach((u, i) => {
-                        console.log(`user[${i}]: class=${u['class']} password=${u.password}`);
-                    });
-                    // findで一致ユーザーを取得
-                    const found = users.find(u => String(u['class']).trim() === String(classValue).trim() && String(u.password).trim() === String(password).trim());
-                    console.log('found:', found);
-                    if (found !== undefined) {
-                        localStorage.setItem(`isLoggedIn${classValue}`, 'true');
-                        window.location.href = `../class/${classValue}.html`;
-                        // ローディング非表示は不要（遷移するため）
-                        return;
+                const users = await res.json(); // もらったデータをJSON形式で読み込む（終わるまで待つ） 例: [{class: "39", password: "furukawagumi"}, ...]
+                if (Array.isArray(users)) { // データが配列（リスト）かどうか確認
+                    // 入力と一致するユーザーを探す
+                    const found = users.find(u => String(u['class']) == String(classValue) && String(u['password']) == String(password)); // 例: {class: "39", password: "furukawagumi"} または undefined
+
+                    // デバッグ用のログ出力
+                    console.log("デバッグ情報:");
+                    console.log(users);
+                    console.log(found);
+                    console.log(`class: ${classValue}, password: ${password}`);
+
+                    if (found !== undefined) { // 一致するユーザーがいた場合
+                        localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
+                        window.location.href = `../class/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
+                        // ローディング非表示は不要（ページ遷移するため）
+                        return; // ここで処理終了
                     }
                 }
-                // 失敗時のみローディング非表示
+                // ログイン失敗時のみローディング画面を消す
                 document.getElementById('loading').style.display = 'none';
-                if (!Array.isArray(users)) {
-                    alert('ユーザーデータの取得に失敗しました');
+                if (!Array.isArray(users)) { // データが配列でなかった場合
+                    alert('ユーザーデータの取得に失敗しました'); // エラー表示
                 } else {
-                    alert("パスワードが違います");
+                    alert("パスワードが違います"); // パスワードが違う場合のエラー表示
                 }
-            } catch (err) {
-                document.getElementById('loading').style.display = 'none';
-                alert('サイトにアクセスできませんでした');
+            } catch (err) { // 何かエラーが起きた場合
+                document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
+                alert('サイトにアクセスできませんでした'); // エラー表示
             }
         });
 
-        // ページ表示時にローディングマークを必ず非表示にする
+        // ページが表示されたときにローディング画面を必ず消す
         window.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loading').style.display = 'none';
-            // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除
-            for (let g = 1; g <= 3; g++) {
-                for (let c = 1; c <= 9; c++) {
-                    localStorage.removeItem(`isLoggedIn${g}${c < 10 ? c : ''}${c}`);
-                }
-            }
+            document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
+            // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除（毎回リセット）
+            //for (let g = 1; g <= 3; g++) { // 学年ごとに 例: g=3
+                //for (let c = 1; c <= 9; c++) { // 1組から9組まで 例: c=9
+                    //localStorage.removeItem(`isLoggedIn${g}${c}`); // ログイン情報を消す 例: localStorage["isLoggedIn39"] を削除
+                //}
+            //}
         });
         </script>
     </div>
