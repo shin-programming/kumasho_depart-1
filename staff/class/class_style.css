@@ -61,10 +61,12 @@ body {
     background: #f5f5f5;
     font-weight: bold;
     text-align: center;
+    font-size: 150%;
 }
 
 .product-table td {
     text-align: left;
+    font-size: 150%;
 }
 
 .product-table th:nth-child(1), .product-table td:nth-child(1) {
@@ -75,4 +77,13 @@ body {
 }
 .product-table th:nth-child(3), .product-table td:nth-child(3) {
     width: 30%;
+}
+
+.status-on-sale {
+    color: #2196f3;
+    font-weight: bold;
+}
+.status-soldout {
+    color: #e53935;
+    font-weight: bold;
 }
