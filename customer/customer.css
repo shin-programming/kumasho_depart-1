@@ -4,10 +4,24 @@ body {
   color: #333;
   margin: 0;
   line-height: 1.7;
+  /* スクロールバーのカスタマイズ（Windows用） */
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 #f9f7f2;
+}
+
+/* Chrome, Edge, Safari用のスクロールバー */
+body::-webkit-scrollbar {
+  width: 8px;
+  background: #f9f7f2;
+}
+body::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
 }
 
 h1 {
   font-size: 200%;
+  letter-spacing: 0.05em;
 }
 
 .main-header {
@@ -249,129 +263,77 @@ footer a {
   border: 1px solid #e0ddd7;
 }
 
-.hidden { display: none; }
+/* --- UI/アクセシビリティ改善 --- */
+.hidden { display: none !important; }
 
 .show-status {
-  all: unset; /* デフォルトのボタンスタイルを完全にリセット */
+  all: unset;
   cursor: pointer;
   font-size: 1rem;
-  color: #1c1c2c; /* 統一感あるナチュラルな色味 */
+  color: #1c1c2c;
   text-decoration: underline;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background 0.3s;
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
 }
-
-.show-status:hover {
-  color: #d4af37; /* 他要素と揃えたアクセントカラーに */
-}
-
-.hero {
-  position: relative;
-  height: 100vh;
-  background: url('img/big.png') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4); /* 文字の可読性向上 */
-  z-index: 1;
-}
-
-.hero-text {
-  position: relative;
-  z-index: 2;
+.show-status[aria-checked="true"],
+.show-status.checked {
   color: #fff;
-}
-
-.hero-text h1 {
-  font-size: 3rem;
-  margin: 0;
-  text-shadow: 1px 1px 5px #000;
-}
-
-.tagline {
-  font-size: 1.2rem;
-  color: #ffd700;
-  margin-top: 0.8rem;
-}
-
-/* スクロール時のセクションフェード効果 */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 以下は既存スタイルに合わせる */
-.intro, .vertical-nav {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 0 1.5rem;
-  text-align: center;
-}
-
-.nav-link {
-  background: #fff;
-  color: #1c1c2c;
-  padding: 1rem 2.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
+  background: #d4af37;
   text-decoration: none;
-  border: 1px solid #e0ddd7;
-  width: 80%;
-  max-width: 400px;
-  margin-bottom: 1rem;
-  display: block;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+}
+.show-status[aria-checked="false"],
+.show-status:not(.checked) {
+  color: #1c1c2c;
+  background: #f3f1ed;
+  text-decoration: underline;
+}
+.show-status:hover {
+  color: #d4af37;
+  background: #fffbe6;
 }
 
-.nav-link:hover {
-  background-color: #f3f1ed;
-  transform: translateY(-2px);
+/* チェックボックス自体を非表示にし、ラベルで見せる場合 */
+input[type="checkbox"].status-checkbox {
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid #d4af37;
+  border-radius: 0.3em;
+  background: #fff;
+  vertical-align: middle;
+  margin-right: 0.5em;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+input[type="checkbox"].status-checkbox:checked {
+  background: #d4af37;
   border-color: #d4af37;
 }
-
-footer {
-  text-align: center;
-  background-color: #1c1c2c;
-  color: #ddd;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
+input[type="checkbox"].status-checkbox:checked::after {
+  content: '\2714';
+  color: #fff;
+  font-size: 1em;
+  position: absolute;
+  left: 0.18em;
+  top: 0.02em;
+}
+input[type="checkbox"].status-checkbox:focus {
+  outline: 2px solid #1c1c2c;
+  outline-offset: 2px;
 }
 
-footer a {
-  color: #d4af37;
-  text-decoration: none;
+.status-label {
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+  margin-right: 1em;
 }
 
-:root {
-  --bg-color: #f9f7f2;
-  --text-color: #333;
-  --accent-color: #d4af37;
+.status-cell {
+  min-width: 110px;
+  text-align: left;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #0f0f0f;
-    --text-color: #eee;
-    --accent-color: #ffd700;
-  }
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Noto Serif JP', serif;
-}

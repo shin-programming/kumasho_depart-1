@@ -23,6 +23,53 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* --- アクセシビリティ・UI改善 --- */
+        input[type="checkbox"].status-checkbox {
+            appearance: none;
+            width: 1.2em;
+            height: 1.2em;
+            border: 2px solid #d4af37;
+            border-radius: 0.3em;
+            background: #fff;
+            vertical-align: middle;
+            margin-right: 0.5em;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        input[type="checkbox"].status-checkbox:checked {
+            background: #d4af37;
+            border-color: #d4af37;
+        }
+        input[type="checkbox"].status-checkbox:checked::after {
+            content: '\2714';
+            color: #fff;
+            font-size: 1em;
+            position: absolute;
+            left: 0.18em;
+            top: 0.02em;
+        }
+        input[type="checkbox"].status-checkbox:focus {
+            outline: 2px solid #1c1c2c;
+            outline-offset: 2px;
+        }
+        .status-label {
+            cursor: pointer;
+            font-weight: 500;
+            user-select: none;
+            margin-right: 1em;
+        }
+        .status-on-sale {
+            color: #2196f3;
+            font-weight: bold;
+        }
+        .status-soldout {
+            color: #e53935;
+            font-weight: bold;
+        }
+        .product-table th, .product-table td {
+            font-size: 120%;
+        }
         </style>
         <script>
             // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
@@ -41,10 +88,10 @@
                 document.getElementById('loading').style.display = 'flex';
                 const className = "3-9";
                 // GET用（初期データ取得）
-                const gas_url = "https://script.google.com/macros/s/AKfycbzKU_3wH7nrO-jCdCh6d4nF2NvRdDPyQKwYEnpQhwFCoyggh5ufvAK1cQf74lyE7M67/exec?sheet=" + encodeURIComponent(className);
+                const gas_url = "https://script.google.com/macros/s/AKfycbx1Lh0OGSo46Yd35uSLp6Ti8OidZQBOe11smPNO-nYtMbC2bVzuIxMXxFyfSD2eirJzCA/exec?sheet=" + encodeURIComponent(className);
                 // POST用（販売状況更新）
-                const gas_post_url = "https://script.google.com/macros/s/AKfycbzKU_3wH7nrO-jCdCh6d4nF2NvRdDPyQKwYEnpQhwFCoyggh5ufvAK1cQf74lyE7M67/exec";
-                fetch(gas_url)
+                const gas_post_url = "https://script.google.com/macros/s/AKfycbx1Lh0OGSo46Yd35uSLp6Ti8OidZQBOe11smPNO-nYtMbC2bVzuIxMXxFyfSD2eirJzCA/exec";
+                await fetch(gas_url)
                     .then(response => response.json())
                     .then(data => {
                         console.log("3-9デバッグ情報:");
