@@ -2,13 +2,13 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <title>熊商デパート ３年９組　完売報告用フォーム</title>
+        <title>熊商デパート ３年８組　完売報告用フォーム</title>
         <link rel="stylesheet" href="class_style.css">
     </head>
     <body>
         <div class="tab-bar" style="display: flex; align-items: flex-start;">
             <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
-                <h1 style="margin: 0;">３年９組　【株式会社　西川商店　熊デパ本店】　完売報告用フォーム</h1>
+                <h1 style="margin: 0;">３年８組　【株式会社　本田商店　熊デパ本店】　完売報告用フォーム</h1>
                 <div class = "product-sold-caption" id="product-count-area" style="margin:4px 0 0 0;font-weight:bold; display:block;">
                     商品数：<span id="pd">0</span>
                      ／ 完売数：<span id="sold-out">0</span>
@@ -25,8 +25,8 @@
         }
         </style>
         <script>
-            // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
-            if (!localStorage.getItem('isLoggedIn39')) {
+            // ログイン時にlocalStorageへ 'isLoggedIn38' を保存している前提
+            if (!localStorage.getItem('isLoggedIn38')) {
                 window.location.href = '../home/home.html';
             }
             // ページ描画後にイベント登録・データ取得
@@ -34,17 +34,17 @@
                 
                 // ログアウト処理
                 document.querySelector('.logout-button').addEventListener('click', function() {
-                    localStorage.removeItem('isLoggedIn39');
+                    localStorage.removeItem('isLoggedIn38');
                     window.location.href = '../home/home.html';
                 });
                 // ローディング表示
                 document.getElementById('loading').style.display = 'flex';
-                const className = "3-9";
+                const className = "3-8";
                 const gas_url = "https://script.google.com/macros/s/AKfycbwX9IxU0Hj1F2ab2TfX9Fe20zMIlzF2zrhBE5aG3rb9Uw9bKuCwELbJ1dThhafvNRrGlA/exec?sheet=" + encodeURIComponent(className);
                 fetch(gas_url)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("3-9デバッグ情報:");
+                        console.log("3-8デバッグ情報:");
                         console.log(data);
                         console.log(`pd: ${data[0].pd}`);
                         console.log(`sold_out: ${data[0].sold_out}`);
