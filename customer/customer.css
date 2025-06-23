@@ -266,8 +266,8 @@ footer a {
   padding: 2rem;
   border-radius: 0.5rem;
   max-height: 80vh;
-  max-width: 600px;
-  width: 90vw;
+  max-width: 400px;
+  width: 95vw;
   overflow: visible; /* モーダル本体はオーバーフロー可 */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   color: #333;
@@ -277,6 +277,14 @@ footer a {
   margin: auto;
   direction: ltr;
   position: relative;
+}
+
+@media (max-width: 500px) {
+  #modal-content {
+    max-width: 95vw;
+    width: 98vw;
+    padding: 1rem;
+  }
 }
 
 #modal-body {
