@@ -41,9 +41,12 @@
                 document.getElementById('loading').style.display = 'flex';
                 const className = "3-9";
                 // GET用（初期データ取得）
-                const gas_url = "https://script.google.com/macros/s/AKfycbzuhPAVTqUhe0zMZgIiZQsK2VpQj19VFmTdDmgjrJKHZMuHWbMZz9sWQOB24-sUlaGDfw/exec?sheet=" + encodeURIComponent(className);
+                const gas_url = "https://script.google.com/macros/s/AKfycbzMRfPuoXAjDxAlNRbkzzK3bmeXy7y_CL5t8SPutjw2Qais7bOPKFIhkvUZL4YaM1CTyw/exec?sheet=" + encodeURIComponent(className);
                 // POST用（販売状況更新）
-                const gas_post_url = "https://script.google.com/macros/s/AKfycbzuhPAVTqUhe0zMZgIiZQsK2VpQj19VFmTdDmgjrJKHZMuHWbMZz9sWQOB24-sUlaGDfw/exec";
+                const gas_post_url = "https://script.google.com/macros/s/AKfycbzMRfPuoXAjDxAlNRbkzzK3bmeXy7y_CL5t8SPutjw2Qais7bOPKFIhkvUZL4YaM1CTyw/exec";
+
+                console.log(gas_url);   //URLが正しいかを確認
+
                 await fetch(gas_url)
                     .then(response => response.json())
                     .then(data => {
