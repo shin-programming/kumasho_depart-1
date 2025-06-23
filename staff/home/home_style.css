@@ -24,15 +24,19 @@ h1 {
 }
 
 .main-btn {
+    top: 24px;
+    right: 32px;
+    z-index: 1000;
     display: inline-block;
     background: #4e8cff;
     color: #fff;
     text-decoration: none;
     font-size: 1.1rem;
     padding: 12px 36px;
-    border-radius: 6px;
+    border-radius: 7px;
     transition: background 0.2s;
     box-shadow: 0 2px 6px rgba(78,140,255,0.08);
+    text-align: center;
 }
 
 .main-btn:hover {
@@ -58,4 +62,34 @@ table td {
 table th {
     background: #f5f6fa;
     font-weight: bold;
+}
+
+.grade-select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.class-select {
+    width: 108.7%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.password-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }

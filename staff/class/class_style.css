@@ -1,49 +1,20 @@
-.tab-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgb(255, 255, 255);
-    border-bottom: 1px solid #ccc;
-    z-index: 1000;
-}
-
-.fixed-count {
-    margin-left: 24px;
-    font-weight: bold;
-    color: #000;
-}
-
-body {
-    margin-top: 56px;
-}
-
 .logout-button {
-    display: inline-block;
-    background: #4e8cff;
+    background: #ff4e4e;
     color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    padding: 12px 36px;
-    border-radius: 6px;
+    font-size: 17px;
+    padding: 10px 7px;
+    border-radius: 7px;
     transition: background 0.2s;
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
-    position: fixed;
-    left: 50%;
-    bottom: 32px;
-    transform: translateX(-50%);
-    z-index: 10000;
+    align-self: flex-end;
 }
 
 .logout-button:hover {
-    background: #2563c9;
+    background: #c92525;
 }
 
 .product-table {
-    width: 100%;
+    width: 97%;
     margin-top: 24px;
     border-collapse: collapse;
     text-align: left;
@@ -86,4 +57,10 @@ body {
 .status-soldout {
     color: #e53935;
     font-weight: bold;
+}
+
+.status-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }

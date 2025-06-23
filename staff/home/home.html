@@ -13,7 +13,7 @@
                 <tr>
                     <td><label for="id">学年</label></td>
                     <td>
-                        <div>    <!--学年選択のラジオボタン-->
+                        <div class="grade-select">    <!--学年選択のラジオボタン-->
                             <label><input type="radio" name="grade" value="1" checked>1年</label>
                             <label><input type="radio" name="grade" value="2">2年</label>
                             <label><input type="radio" name="grade" value="3">3年</label>
@@ -23,7 +23,7 @@
                 <tr>
                     <td><label for="class">クラス</label></td>
                     <td>
-                        <select id="class" name="class" required>
+                        <select id="class" name="class" class="class-select" required>
                             <!-- オプションはJavaScriptによって追加されます -->
                         </select>
 
@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td><label for="password">パスワード</label></td>
-                    <td><input type="password" id="password" name="password" required></td>
+                    <td><input type="password" id="password" name="password" class="password-input" required></td>
                 </tr>
             </table>
             <br>
