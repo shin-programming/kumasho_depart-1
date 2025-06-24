@@ -1,11 +1,13 @@
+const className = document.getElementById("Div").dataset.classname;
+
+console.log(className); // classNameは別のスクリプトで定義されている前提
+
 // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
 if (!localStorage.getItem('isLoggedIn39')) {
     window.location.href = '../home/home.html';
 }
 // ページ描画後にイベント登録・データ取得
 window.addEventListener('DOMContentLoaded', async function () {
-
-    const className = "3-9";
 
     // ログアウト処理
     document.querySelector('.logout-button').addEventListener('click', function () {
