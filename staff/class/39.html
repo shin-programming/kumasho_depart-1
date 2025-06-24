@@ -1,127 +1,26 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang = "ja">
     <head>
-        <meta charset="UTF-8">
+        <meta charset = "UTF-8">
         <title>熊商デパート ３年９組　完売報告用フォーム</title>
-        <link rel="stylesheet" href="class_style.css">
+        <link rel = "stylesheet" href = "class_style.css">
+        <script src="class_script.js"></script>
     </head>
     <body>
         <table>
             <tr>
-                <th><h1 style="margin: 0;">３年９組　【企業名】　完売報告用フォーム</h1></th>
-                <button class="logout-button" style="float: right;">ログアウト</button>
+                <th><h1 style = "margin: 0;">３年９組　【企業名】</h1></th>
+                <button class = "logout-button" style = "float: right;">ログアウト</button>
+                <button class = "reload-button" style = "float: right;">再読み込み</button>
             </tr>
-            <tr style="float: left;">
-                <th>商品数：<span id="pd">0</span>
-                    ／ 完売数：<span id="sold-out">0</span></th>
+            <tr style = "float: left;">
+                <th>商品数：<span id = "pd">0</span>
+                    ／ 完売数：<span id = "sold-out">0</span></th>
             </tr>
         </table>
-        <div id="loading" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;">
+        <div id = "loading" style = "position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;">
             <div class="spinner" style="border:8px solid #eee;border-top:8px solid #2196f3;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
         </div>
-        <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        </style>
-        <script>
-            // ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
-            if (!localStorage.getItem('isLoggedIn39')) {
-                window.location.href = '../home/home.html';
-            }
-            // ページ描画後にイベント登録・データ取得
-            window.addEventListener('DOMContentLoaded', async function() {
-                
-                // ログアウト処理
-                document.querySelector('.logout-button').addEventListener('click', function() {
-                    localStorage.removeItem('isLoggedIn39');
-                    window.location.href = '../home/home.html';
-                });
-                // ローディング表示
-                document.getElementById('loading').style.display = 'flex';
-                const className = "3-9";
-                // GET用（初期データ取得）
-                const gas_url = "https://script.google.com/macros/s/AKfycbzMRfPuoXAjDxAlNRbkzzK3bmeXy7y_CL5t8SPutjw2Qais7bOPKFIhkvUZL4YaM1CTyw/exec?sheet=" + encodeURIComponent(className);
-                // POST用（販売状況更新）
-                const gas_post_url = "https://script.google.com/macros/s/AKfycbzMRfPuoXAjDxAlNRbkzzK3bmeXy7y_CL5t8SPutjw2Qais7bOPKFIhkvUZL4YaM1CTyw/exec";
-
-                console.log(gas_url);   //URLが正しいかを確認
-
-                await fetch(gas_url)
-                    .then(response => response.json())
-                    .then(data => {
-
-                        console.log("3-9デバッグ情報:");
-                        console.log(data);
-                        console.log(`pd: ${data[0].pd}`);
-                        console.log(`sold_out: ${data[0].sold_out}`);
-                        document.getElementById("pd").textContent = data[0].pd;
-                        document.getElementById("sold-out").textContent = data[0].sold_out;
-
-                        // 商品テーブル生成
-                        const table = document.getElementById('product-table');
-                        // ヘッダー
-                        table.innerHTML = `<thead><tr><th>商品名</th><th>販売価格</th><th>販売状況</th></tr></thead><tbody></tbody>`;
-                        const tbody = table.querySelector('tbody');
-                        // データ行
-                        data.slice(1).forEach(item => {
-                            const tr = document.createElement('tr');
-                            // 販売状況のクラス分岐
-                            let statusClass = '';
-                            // 商品名の前後空白を除去して比較用に格納
-                            const pdname = (item.pdname || '').trim();
-                            const isSoldout = (item.sales || '').trim() === '完売';
-                            statusClass = isSoldout ? 'status-soldout' : 'status-on-sale';
-                            // チェックボックスHTML
-                            const checkbox = `<input type="checkbox" class="status-checkbox" data-pdname="${pdname}" ${isSoldout ? 'checked' : ''}>`;
-                            tr.innerHTML = `<td>${pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price || '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
-                            tbody.appendChild(tr);
-                        });
-                        // チェックボックスイベント登録
-                        tbody.querySelectorAll('.status-checkbox').forEach(cb => {
-                            cb.addEventListener('change', function() {
-                                // 商品名の前後空白を除去して送信
-                                const pdname = (this.getAttribute('data-pdname') || '').trim();
-                                const newStatus = this.checked ? '完売' : '販売中';
-                                // ラベルも即時切り替え
-                                this.nextElementSibling.textContent = newStatus;
-                                // クラスも切り替え
-                                this.parentElement.className = this.checked ? 'status-soldout' : 'status-on-sale';
-                                // GASへPOST（POST用URLはクエリなし）
-                                const params = new URLSearchParams({
-                                    sheet: className,
-                                    pdname: pdname,
-                                    status: newStatus
-                                });
-
-                                fetch(gas_post_url, {
-                                    method: 'POST',
-                                    body: params
-                                })
-
-                                .then(res => res.text())
-                                .then(result => {
-                                    // alert('GAS返却値: ' + result); // ★デバッグ用
-                                    if(result !== 'OK') alert('スプレッドシート更新に失敗しました');
-                                    
-                                    fetch(gas_url)
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            // 商品数と完売数を更新
-                                            document.getElementById("pd").textContent = data[0].pd;
-                                            document.getElementById("sold-out").textContent = data[0].sold_out;
-                                        });
-
-                                });
-                            });
-                        });
-                    })
-                    .finally(() => {
-                        document.getElementById('loading').style.display = 'none';
-                    });
-            });
-        </script>
         <br>
         <table class = "product-table" id="product-table">
             <!-- JSでヘッダー・データ行を生成 -->

@@ -13,6 +13,21 @@
     background: #c92525;
 }
 
+.reload-button{
+    background: #4e51ff;
+        color: #fff;
+        font-size: 17px;
+        padding: 10px 7px;
+        border-radius: 7px;
+        transition: background 0.2s;
+        box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
+        align-self: flex-end;
+}
+
+.reload-button:hover {
+    background: #2530c9;
+}
+
 .product-table {
     width: 97%;
     margin-top: 24px;
@@ -63,4 +78,14 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -72,16 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove('hidden');
       document.body.classList.add('modal-open');
       modalBody.innerHTML = '読み込み中...';
-      const Gas_Url = `https://script.google.com/macros/s/AKfycbzMRfPuoXAjDxAlNRbkzzK3bmeXy7y_CL5t8SPutjw2Qais7bOPKFIhkvUZL4YaM1CTyw/exec?sheet=${encodeURIComponent(className)}`;
+      const Gas_Url = "https://script.google.com/macros/s/AKfycby6BMyWgMtaK-1zEJdJZWtzpRDXVypGrDLjnx-lJ9JIovnl2x5f8B7jKrph2ea86KOkdw/exec?sheet=" + encodeURIComponent(className);
+      
+      console.log(className); // クラス名が正しいかを確認
+      console.log(Gas_Url); // URLが正しいかを確認
+      
       fetch(Gas_Url)
         .then(response => response.json())
         .then(data => {
           modalBody.innerHTML = data.map(item => {
-            const isSoldOut = item["販売状況"] === "完売";
+            const isSoldOut = item.sales === "完売";
             return `<div class=\"item\" style=\"margin-bottom: 16px;\">`
-              + `<strong>${item["商品名"]}</strong><br>`
-              + `価格: ¥${item["価格"]}<br>`
-              + `販売状況: <span style=\"color:${isSoldOut ? 'red' : 'black'};\">${item["販売状況"]}</span><br>`
+              + `<strong>${item.pdname}</strong><br>`
+              + `価格: ¥${item.price}<br>`
+              + `販売状況: <span style=\"color:${isSoldOut ? 'red' : 'black'};\">${item.sales}</span><br>`
               + `</div>`;
           }).join('');
         })
