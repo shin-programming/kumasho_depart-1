@@ -15,13 +15,14 @@
 
 .reload-button{
     background: #4e51ff;
-        color: #fff;
-        font-size: 17px;
-        padding: 10px 7px;
-        border-radius: 7px;
-        transition: background 0.2s;
-        box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
-        align-self: flex-end;
+    color: #fff;
+    font-size: 17px;
+    padding: 10px 7px;
+    border-radius: 7px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
+    align-self: flex-end;
+    display: none;
 }
 
 .reload-button:hover {
