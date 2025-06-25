@@ -94,7 +94,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                             .then(response => response.json())
                             .then(data => {
                                 // 商品数と完売数を更新
-                                document.getElementById("pd").textContent = data.length - 2;
+                                document.getElementById("pd").textContent = data.length;
                                 document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
                             });
 
