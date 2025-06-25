@@ -1,9 +1,11 @@
 const className = document.getElementById("className").dataset.classname;
+const classNumber = document.getElementById("classNumber").dataset.classNumber;
 
 console.log(className); // classNameは別のスクリプトで定義されている前提
+console.log(classNumber); // classNumberは別のスクリプトで定義されている前提
 
-// ログイン時にlocalStorageへ 'isLoggedIn39' を保存している前提
-if (!localStorage.getItem('isLoggedIn39')) {
+// ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
+if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
     window.location.href = '../home/home.html';
 }
 // ページ描画後にイベント登録・データ取得
@@ -11,7 +13,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     // ログアウト処理
     document.querySelector('.logout-button').addEventListener('click', function () {
-        localStorage.removeItem('isLoggedIn39');
+        localStorage.removeItem(`isLoggedIn${classNumber}`);
         window.location.href = '../home/home.html';
     });
 
