@@ -1,5 +1,5 @@
 const className = document.getElementById("className").dataset.classname;
-const classNumber = document.getElementById("classNumber").dataset.classNumber;
+const classNumber = document.getElementById("classNumber").dataset.classnumber;
 
 console.log(className); // classNameは別のスクリプトで定義されている前提
 console.log(classNumber); // classNumberは別のスクリプトで定義されている前提
