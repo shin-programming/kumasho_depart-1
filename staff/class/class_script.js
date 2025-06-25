@@ -1,4 +1,4 @@
-const className = document.getElementById("Div").dataset.classname;
+const className = document.getElementById("className").dataset.classname;
 
 console.log(className); // classNameは別のスクリプトで定義されている前提
 
@@ -83,20 +83,20 @@ window.addEventListener('DOMContentLoaded', async function () {
                         body: params
                     })
 
-                        .then(res => res.text())
-                        .then(result => {
-                            // alert('GAS返却値: ' + result); // ★デバッグ用
-                            if (result !== 'OK') alert('スプレッドシート更新に失敗しました');
+                    .then(res => res.text())
+                    .then(result => {
+                        // alert('GAS返却値: ' + result); // ★デバッグ用
+                        if (result !== 'OK') alert('スプレッドシート更新に失敗しました');
 
-                            fetch(gas_url)
-                                .then(response => response.json())
-                                .then(data => {
-                                    // 商品数と完売数を更新
-                                    document.getElementById("pd").textContent = data.length - 2;
-                                    document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
-                                });
+                        fetch(gas_url)
+                            .then(response => response.json())
+                            .then(data => {
+                                // 商品数と完売数を更新
+                                document.getElementById("pd").textContent = data.length - 2;
+                                document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
+                            });
 
-                        });
+                    });
                 });
             });
         })

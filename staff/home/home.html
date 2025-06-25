@@ -1,166 +1,270 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>熊商デパート 関係者ログイン</title>
-    <link rel="stylesheet" href="home_style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>熊商デパート 関係者ログイン</h1>
-        <form>
-            <table align="center">
-                <tr>
-                    <td><label for="id">学年</label></td>
-                    <td>
-                        <div class="grade-select">    <!--学年選択のラジオボタン-->
-                            <label><input type="radio" name="grade" value="1" checked>1年</label>
-                            <label><input type="radio" name="grade" value="2">2年</label>
-                            <label><input type="radio" name="grade" value="3">3年</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="class">クラス</label></td>
-                    <td>
-                        <select id="class" name="class" class="class-select" required>
-                            <!-- オプションはJavaScriptによって追加されます -->
-                        </select>
 
-                        <!--ここからJavaScript-->
-                        <script>    // 学年ごとのクラス選択肢を追加
-                        const classOptions = {
-                            1: [
-                                { value: "11", text: "1組" },
-                                { value: "12", text: "2組" },
-                                { value: "13", text: "3組" },
-                                { value: "14", text: "4組" },
-                                { value: "15", text: "5組" },
-                                { value: "16", text: "6組" },
-                                { value: "17", text: "7組" },
-                                { value: "18", text: "8組" },
-                                { value: "19", text: "9組" }
-                            ],
-                            2: [
-                                { value: "21", text: "1組" },
-                                { value: "22", text: "2組" },
-                                { value: "23", text: "3組" },
-                                { value: "24", text: "4組" },
-                                { value: "25", text: "5組" },
-                                { value: "26", text: "6組" },
-                                { value: "27", text: "7組" },
-                                { value: "28", text: "8組" },
-                                { value: "29", text: "9組" }
-                            ],
-                            3: [
-                                { value: "31", text: "1組" },
-                                { value: "32", text: "2組" },
-                                { value: "33", text: "3組" },
-                                { value: "34", text: "4組" },
-                                { value: "35", text: "5組" },
-                                { value: "36", text: "6組" },
-                                { value: "37", text: "7組" },
-                                { value: "38", text: "8組" },
-                                { value: "39", text: "9組" }
-                            ]
-                        };
+    <head>
+        <meta charset="UTF-8">
+        <title>熊商デパート 関係者ログイン</title>
+        <link rel="stylesheet" href="home_style.css">
+    </head>
 
-                        // 選択された学年に応じてクラスの選択肢を更新する関数
-                        function updateClassOptions(grade) {
-                            // クラス選択用の<select>要素を取得
-                            const select = document.getElementById('class');
-                            // 既存の選択肢をクリアし、デフォルトの選択肢を追加
-                            select.innerHTML = '<option value="" disabled selected>クラスを選択</option>';
-                            // 指定された学年のクラス一覧をループして<option>要素を追加
-                            classOptions[grade].forEach(opt => {
-                                const option = document.createElement('option');
-                                option.value = opt.value;      // クラスの値を設定
-                                option.textContent = opt.text; // クラスの表示名を設定
-                                select.appendChild(option);    // <select>に追加
-                            });
+    <style>
+        body {
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            min-height: 300px;
+            height: auto;
+            margin: 100px auto;
+            background: #fff;
+            border-radius: 67px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 36px 24px 36px 24px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2d3e50;
+            margin-bottom: 24px;
+            font-size: 2rem;
+        }
+
+        .main-btn {
+            top: 24px;
+            right: 32px;
+            z-index: 1000;
+            display: inline-block;
+            background: #4e8cff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 36px;
+            border-radius: 7px;
+            transition: background 0.2s;
+            box-shadow: 0 2px 6px rgba(78,140,255,0.08);
+            text-align: center;
+        }
+
+        .main-btn:hover {
+            background: #2563c9;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        table{
+            width: 70%;
+            font-size: 130%;
+        }
+
+        table th,
+        table td {
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        table th {
+            background: #f5f6fa;
+            font-weight: bold;
+        }
+
+        .grade-select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .class-select {
+            width: 108.7%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <h1>熊商デパート 関係者ログイン</h1>
+            <form>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <label for="id">学年</label>
+                        </td>
+                        <td>
+                            <div class="grade-select">    <!--学年選択のラジオボタン-->
+                                <label><input type="radio" name="grade" value="1" checked>1年</label>
+                                <label><input type="radio" name="grade" value="2">2年</label>
+                                <label><input type="radio" name="grade" value="3">3年</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="class">クラス</label>
+                        </td>
+                        <td>
+                            <select id="class" name="class" class="class-select" required>
+                                <!-- オプションはJavaScriptによって追加されます -->
+                            </select>
+
+                            <!--ここからJavaScript-->
+                            <script>    // 学年ごとのクラス選択肢を追加
+                                const classOptions = {
+                                    1: [
+                                        { value: "11", text: "1組" },
+                                        { value: "12", text: "2組" },
+                                        { value: "13", text: "3組" },
+                                        { value: "14", text: "4組" },
+                                        { value: "15", text: "5組" },
+                                        { value: "16", text: "6組" },
+                                        { value: "17", text: "7組" },
+                                        { value: "18", text: "8組" },
+                                        { value: "19", text: "9組" }
+                                    ],
+                                    2: [
+                                        { value: "21", text: "1組" },
+                                        { value: "22", text: "2組" },
+                                        { value: "23", text: "3組" },
+                                        { value: "24", text: "4組" },
+                                        { value: "25", text: "5組" },
+                                        { value: "26", text: "6組" },
+                                        { value: "27", text: "7組" },
+                                        { value: "28", text: "8組" },
+                                        { value: "29", text: "9組" }
+                                    ],
+                                    3: [
+                                        { value: "31", text: "1組" },
+                                        { value: "32", text: "2組" },
+                                        { value: "33", text: "3組" },
+                                        { value: "34", text: "4組" },
+                                        { value: "35", text: "5組" },
+                                        { value: "36", text: "6組" },
+                                        { value: "37", text: "7組" },
+                                        { value: "38", text: "8組" },
+                                        { value: "39", text: "9組" }
+                                    ]
+                                };
+
+                            // 選択された学年に応じてクラスの選択肢を更新する関数
+                                function updateClassOptions(grade) {
+                                    // クラス選択用の<select>要素を取得
+                                    const select = document.getElementById('class');
+                                    // 既存の選択肢をクリアし、デフォルトの選択肢を追加
+                                    select.innerHTML = '<option value="" disabled selected>クラスを選択</option>';
+                                    // 指定された学年のクラス一覧をループして<option>要素を追加
+                                    classOptions[grade].forEach(opt => {
+                                        const option = document.createElement('option');
+                                        option.value = opt.value;      // クラスの値を設定
+                                        option.textContent = opt.text; // クラスの表示名を設定
+                                        select.appendChild(option);    // <select>に追加
+                                    });
+                                }
+
+                                // 学年ラジオボタンの変更イベントを監視し、選択時にクラス選択肢を更新
+                                document.querySelectorAll('input[name="grade"]').forEach(radio => {
+                                    radio.addEventListener('change', function() {
+                                        updateClassOptions(this.value); //関数呼び出し
+                                    });
+                                });
+
+                                // ページ初期表示時、選択されている学年に応じてクラス選択肢を初期化
+                                updateClassOptions(document.querySelector('input[name="grade"]:checked').value);
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">パスワード</label></td>
+                        <td><input type="password" id="password" name="password" class="password-input" required></td>
+                    </tr>
+                </table>
+                <br>
+                <button type="submit" class="main-btn">ログイン</button>
+            </form>
+
+            <!-- ローディングマーク（スピナー） -->
+            <div id="loading" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;">
+                <div style="border:8px solid #f3f3f3;border-top:8px solid #3498db;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
+            </div>
+            
+            <script>
+                // フォームの送信（ログインボタンが押されたとき）を監視する
+                document.querySelector('form').addEventListener('submit', async function(p) {
+                    p.preventDefault(); // フォームの標準の動作（ページ遷移）を止める
+                    document.getElementById('loading').style.display = 'flex'; // ローディング画面（ぐるぐる）を表示する
+                    const classValue = document.getElementById('class').value; // クラスの選択値を取得 例: "39"（3年9組）
+                    const password = document.getElementById('password').value; // パスワードの入力値を取得 例: "furukawagumi"
+                    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_Ttxeg35Rwh1IJTX2ZFNzPyJ6ebHS5QpCQpfRDujqPU-S5XR9Ulv-Mn4z8oQd2yoe/exec'; // データ取得用のURL
+                    try {
+                        const res = await fetch(GAS_URL); // URLにアクセスしてデータをもらう（終わるまで待つ） 例: レスポンスオブジェクト
+                        if (!res.ok) { // もしネットワークエラーなどで失敗したら
+                            throw new Error('ネットワークエラー'); // エラーを発生させてcatchに飛ばす
                         }
+                        const users = await res.json(); // もらったデータをJSON形式で読み込む（終わるまで待つ） 例: [{class: "39", password: "furukawagumi"}, ...]
+                        if (Array.isArray(users)) { // データが配列（リスト）かどうか確認
+                            // 入力と一致するユーザーを探す
+                            const found = users.find(u => String(u['class']) == String(classValue) && String(u['password']) == String(password)); // 例: {class: "39", password: "furukawagumi"} または undefined
 
-                        // 学年ラジオボタンの変更イベントを監視し、選択時にクラス選択肢を更新
-                        document.querySelectorAll('input[name="grade"]').forEach(radio => {
-                            radio.addEventListener('change', function() {
-                                updateClassOptions(this.value); //関数呼び出し
-                            });
-                        });
+                            // デバッグ用のログ出力
+                            console.log("パスワードデバッグ情報:");
+                            console.log(users);
+                            console.log(found);
+                            console.log(`class: ${classValue}, password: ${password}`);
 
-                        // ページ初期表示時、選択されている学年に応じてクラス選択肢を初期化
-                        updateClassOptions(document.querySelector('input[name="grade"]:checked').value);
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="password">パスワード</label></td>
-                    <td><input type="password" id="password" name="password" class="password-input" required></td>
-                </tr>
-            </table>
-            <br>
-            <button type="submit" class="main-btn">ログイン</button>
-        </form>
-
-        <!-- ローディングマーク（スピナー） -->
-        <div id="loading" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);z-index:2000;display:flex;align-items:center;justify-content:center;">
-            <div style="border:8px solid #f3f3f3;border-top:8px solid #3498db;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
-        </div>
-        
-        <script>
-        // フォームの送信（ログインボタンが押されたとき）を監視する
-        document.querySelector('form').addEventListener('submit', async function(p) {
-            p.preventDefault(); // フォームの標準の動作（ページ遷移）を止める
-            document.getElementById('loading').style.display = 'flex'; // ローディング画面（ぐるぐる）を表示する
-            const classValue = document.getElementById('class').value; // クラスの選択値を取得 例: "39"（3年9組）
-            const password = document.getElementById('password').value; // パスワードの入力値を取得 例: "furukawagumi"
-            const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_Ttxeg35Rwh1IJTX2ZFNzPyJ6ebHS5QpCQpfRDujqPU-S5XR9Ulv-Mn4z8oQd2yoe/exec'; // データ取得用のURL
-            try {
-                const res = await fetch(GAS_URL); // URLにアクセスしてデータをもらう（終わるまで待つ） 例: レスポンスオブジェクト
-                if (!res.ok) { // もしネットワークエラーなどで失敗したら
-                    throw new Error('ネットワークエラー'); // エラーを発生させてcatchに飛ばす
-                }
-                const users = await res.json(); // もらったデータをJSON形式で読み込む（終わるまで待つ） 例: [{class: "39", password: "furukawagumi"}, ...]
-                if (Array.isArray(users)) { // データが配列（リスト）かどうか確認
-                    // 入力と一致するユーザーを探す
-                    const found = users.find(u => String(u['class']) == String(classValue) && String(u['password']) == String(password)); // 例: {class: "39", password: "furukawagumi"} または undefined
-
-                    // デバッグ用のログ出力
-                    console.log("パスワードデバッグ情報:");
-                    console.log(users);
-                    console.log(found);
-                    console.log(`class: ${classValue}, password: ${password}`);
-
-                    if (found !== undefined) { // 一致するユーザーがいた場合
-                        localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
-                        window.location.href = `../class/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
-                        // ローディング非表示は不要（ページ遷移するため）
-                        return; // ここで処理終了
+                            if (found !== undefined) { // 一致するユーザーがいた場合
+                                localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
+                                window.location.href = `../class/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
+                                // ローディング非表示は不要（ページ遷移するため）
+                                return; // ここで処理終了
+                            }
+                        }
+                        // ログイン失敗時のみローディング画面を消す
+                        document.getElementById('loading').style.display = 'none';
+                        if (!Array.isArray(users)) { // データが配列でなかった場合
+                            alert('ユーザーデータの取得に失敗しました'); // エラー表示
+                        } else {
+                            alert("パスワードが違います"); // パスワードが違う場合のエラー表示
+                        }
+                    } catch (err) { // 何かエラーが起きた場合
+                        document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
+                        alert('サイトにアクセスできませんでした'); // エラー表示
                     }
-                }
-                // ログイン失敗時のみローディング画面を消す
-                document.getElementById('loading').style.display = 'none';
-                if (!Array.isArray(users)) { // データが配列でなかった場合
-                    alert('ユーザーデータの取得に失敗しました'); // エラー表示
-                } else {
-                    alert("パスワードが違います"); // パスワードが違う場合のエラー表示
-                }
-            } catch (err) { // 何かエラーが起きた場合
-                document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
-                alert('サイトにアクセスできませんでした'); // エラー表示
-            }
-        });
+                });
 
-        // ページが表示されたときにローディング画面を必ず消す
-        window.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
-            // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除（毎回リセット）
-            for (let g = 1; g <= 3; g++) { // 学年ごとに 例: g=3
-                for (let c = 1; c <= 9; c++) { // 1組から9組まで 例: c=9
-                    localStorage.removeItem(`isLoggedIn${g}${c}`); // ログイン情報を消す 例: localStorage["isLoggedIn39"] を削除
-                }
-            }
-        });
-        </script>
-    </div>
-</body>
+                // ページが表示されたときにローディング画面を必ず消す
+                window.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
+                    // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除（毎回リセット）
+                    for (let g = 1; g <= 3; g++) { // 学年ごとに 例: g=3
+                        for (let c = 1; c <= 9; c++) { // 1組から9組まで 例: c=9
+                            localStorage.removeItem(`isLoggedIn${g}${c}`); // ログイン情報を消す 例: localStorage["isLoggedIn39"] を削除
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </body>
 </html>

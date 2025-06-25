@@ -55,13 +55,18 @@
     font-size: 150%;
 }
 
-.product-table th:nth-child(1), .product-table td:nth-child(1) {
+.product-table th:nth-child(1), 
+.product-table td:nth-child(1) {
     width: 40%;
 }
-.product-table th:nth-child(2), .product-table td:nth-child(2) {
+
+.product-table th:nth-child(2), 
+.product-table td:nth-child(2) {
     width: 30%;
 }
-.product-table th:nth-child(3), .product-table td:nth-child(3) {
+
+.product-table th:nth-child(3), 
+.product-table td:nth-child(3) {
     width: 30%;
 }
 
@@ -69,6 +74,7 @@
     color: #2196f3;
     font-weight: bold;
 }
+
 .status-soldout {
     color: #e53935;
     font-weight: bold;
