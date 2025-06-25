@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isSoldOut = item.sales === "完売";
             return `<div class=\"item\" style=\"margin-bottom: 16px;\">`
               + `<strong>${item.pdname}</strong><br>`
-              + `価格: ¥${item.price}<br>`
+              + `価格: ¥${item.price.toLocaleString()}<br>`
               + `販売状況: <span style=\"color:${isSoldOut ? 'red' : 'black'};\">${item.sales}</span><br>`
               + `</div>`;
           }).join('');

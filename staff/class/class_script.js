@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                 statusClass = isSoldout ? 'status-soldout' : 'status-on-sale';
                 // チェックボックスHTML
                 const checkbox = `<input type="checkbox" class="status-checkbox" data-pdname="${pdname}" ${isSoldout ? 'checked' : ''}>`;
-                tr.innerHTML = `<td>${pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price || '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
+                tr.innerHTML = `<td>${pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price.toLocaleString() || '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
                 tbody.appendChild(tr);
             });
             // チェックボックスイベント登録
