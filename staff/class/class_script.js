@@ -1,8 +1,11 @@
+//htmlファイルから格納されたデータの取得
 const className = document.getElementById("className").dataset.classname;
 const classNumber = document.getElementById("classNumber").dataset.classnumber;
 
-console.log(className); // classNameは別のスクリプトで定義されている前提
-console.log(classNumber); // classNumberは別のスクリプトで定義されている前提
+// 正常に取得できているかの確認
+console.log("デバッグ情報:");
+console.log(`className: ${className}`);
+console.log(`classNumber: ${classNumber}`);
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
@@ -29,26 +32,26 @@ window.addEventListener('DOMContentLoaded', async function () {
     // POST用（販売状況更新）
     const gas_post_url = "https://script.google.com/macros/s/AKfycby6BMyWgMtaK-1zEJdJZWtzpRDXVypGrDLjnx-lJ9JIovnl2x5f8B7jKrph2ea86KOkdw/exec";
 
-    console.log("3-9デバッグ情報:");
-    console.log(`className: ${className}`);
-    console.log(gas_url);   //URLが正しいかを確認
+    console.log(`gas_url: ${gas_url}`);    //URLが正しいかを確認
 
     await fetch(gas_url)
         .then(response => response.json())
         .then(data => {
 
-            console.log(data);
-            console.log(`number of products: ${data.length}`);
-            console.log(`number of sold out products: ${data.filter(item => item.sales === "完売").length}`);
+            console.log(data);    //gasから取得したデータの確認
+            console.log(`number of products: ${data.length}`);    //データ数（商品数の確認）
+            console.log(`number of sold out products: ${data.filter(item => item.sales === "完売").length}`);    //完売数の確認
 
             document.getElementById("pd").textContent = data.length;
             document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
 
             // 商品テーブル生成
             const table = document.getElementById('product-table');
+
             // ヘッダー
             table.innerHTML = `<thead><tr><th>商品名</th><th>販売価格</th><th>販売状況</th></tr></thead><tbody></tbody>`;
             const tbody = table.querySelector('tbody');
+
             // データ行
             data.slice(0).forEach(item => {
                 const tr = document.createElement('tr');
@@ -102,7 +105,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                 });
             });
         })
-        .finally(() => {
-            document.getElementById('loading').style.display = 'none';
+        .finally(() => {    // ローディング非表示
+            document.getElementById('loading').style.display = 'none';    
         });
 });
