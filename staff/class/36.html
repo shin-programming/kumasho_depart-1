@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "ja">
+
+    <head>
+        <div id="className" data-className="3-6"></div>
+        <meta charset = "UTF-8">
+        <title>熊商デパート ３年６組　完売報告用フォーム</title>
+        <link rel = "stylesheet" href = "class_style.css">
+    </head>
+
+    <body>
+        <script src="class_script.js"></script>
+        <table>
+            <tr>
+                <th><h1 style = "margin: 0;">３年６組　【企業名】</h1></th>
+                <button class = "logout-button" style = "float: right;">ログアウト</button>
+                <button class = "reload-button" style = "float: right;">再読み込み</button>
+            </tr>
+            <tr style = "float: left;">
+                <th>
+                    商品数：<span id = "pd">0</span>
+                    ／ 完売数：<span id = "sold-out">0</span>
+                </th>
+            </tr>
+        </table>
+        <div id = "loading" style = "position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;">
+            <div class="spinner" style="border:8px solid #eee;border-top:8px solid #2196f3;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
+        </div>
+        <br>
+        <table class = "product-table" id="product-table">
+            <!-- JSでヘッダー・データ行を生成 -->
+        </table>
+    </body>
+    
+</html>

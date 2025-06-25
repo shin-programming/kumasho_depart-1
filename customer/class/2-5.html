@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>熊デパ2-5店舗紹介</title>
+  <link rel="stylesheet" href="../customer.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-inner">
+      <h1>【店舗名】</h1>
+      <p class="tagline">【キャッチコピー】</p>
+    </div>
+  </header>
+
+  <section class="detail-section">
+    <img src="img/2-5/*.jpg" alt="店舗写真" />
+    <h2>店舗紹介</h2>
+    <p>
+      【PR文１】<br>
+      【PR文２】
+    </p>
+
+    <h2>おすすめ商品</h2>
+    <center>
+    <div class="product-card-list">
+      <div class="product-card">
+        <img src="img/2-5/*.jpg" alt="おすすめ１">
+        <div class="product-card-body">
+          <h3>【おすすめ商品１】</h3>
+          <p class="product-price">【値段】</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="img/2-5/*.jpg" alt="おすすめ２">
+        <div class="product-card-body">
+          <h3>【おすすめ商品２】</h3>
+          <p class="product-price">【値段】</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="img/2-5/*.jpg" alt="おすすめ３">
+        <div class="product-card-body">
+          <h3>【おすすめ商品３】</h3>
+          <p class="product-price">【値段】</p>
+        </div>
+      </div>
+    </div>
+    <!-- 販売状況ボタン -->
+<button class="show-status" data-class="2-5">全商品の販売状況はこちら</button>
+
+<!-- モーダルウィンドウ -->
+<div id="modal" class="hidden">
+  <div id="modal-content">
+    <span id="modal-close" style="font-size: 1.5rem;">&times;</span>
+    <div id="modal-body">読み込み中...</div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('modal');
+  const modalBody = document.getElementById('modal-body');
+  const modalClose = document.getElementById('modal-close');
+
+  // 販売状況ボタンのクリックでモーダル表示・データ取得
+  document.querySelectorAll('.show-status').forEach(button => {
+    button.addEventListener('click', () => {
+      const className = "2-5";
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      modalBody.innerHTML = '読み込み中...';
+      const Gas_Url = "https://script.google.com/macros/s/AKfycby6BMyWgMtaK-1zEJdJZWtzpRDXVypGrDLjnx-lJ9JIovnl2x5f8B7jKrph2ea86KOkdw/exec?sheet=" + encodeURIComponent(className);
+      
+      console.log(className); // クラス名が正しいかを確認
+      console.log(Gas_Url); // URLが正しいかを確認
+      
+      fetch(Gas_Url)
+        .then(response => response.json())
+        .then(data => {
+          modalBody.innerHTML = data.map(item => {
+            const isSoldOut = item.sales === "完売";
+            return `<div class=\"item\" style=\"margin-bottom: 16px;\">`
+              + `<strong>${item.pdname}</strong><br>`
+              + `価格: ¥${item.price}<br>`
+              + `販売状況: <span style=\"color:${isSoldOut ? 'red' : 'black'};\">${item.sales}</span><br>`
+              + `</div>`;
+          }).join('');
+        })
+        .catch(error => {
+          modalBody.innerHTML = 'データの取得に失敗しました。';
+        });
+    });
+  });
+
+  // モーダルを閉じる
+  modalClose.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  });
+  window.addEventListener('click', (e) => {
+    if (e.target.id === 'modal') {
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+  });
+});
+</script>
+
+</center>
+
+    <a href="../store.html" class="back-link">← クラス一覧に戻る</a>
+  </section>
+
+  <footer>
+    <p>公式インスタグラム: <a href="https://www.instagram.com/kumasho.dept/" target="_blank">kumasho.dept</a></p>
+    <small>© 課題研究 アプリ開発班</small>
+  </footer>
+</body>
+</html>
