@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <div id="className" data-className="3-2"></div>    <!-- クラスごとに変更 -->
+        <div id="classNumber" data-classnumber="32"></div>    <!-- クラスごとに変更 -->
+        <meta charset="UTF-8">
+        <title>熊デパ　３－２　【企業名】</title>    <!-- クラスごとに変更 -->
+        <link rel="stylesheet" href="../class_style.css">
+    </head>
+
+    <body>
+        <script src="../class_script_3g.js"></script>    <!-- 学年ごとにjsファイルの変更 -->
+        <table>
+            <tr>
+                <th>
+                    <h1>３年２組　【企業名】</h1>     <!-- クラスごとに変更 -->
+                </th>
+                <button class="logout-button">ログアウト</button>
+                <button class="reload-button">再読み込み</button>
+            </tr>
+            <tr class="pd-sold">
+                <th>
+                    商品数：<span id="pd">0</span>／ 完売数：<span id="sold-out">0</span>
+                </th>
+            </tr>
+        </table>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+        </div>
+        <br>
+        <table class="product-table" id="product-table">
+            <!-- JSでヘッダー・データ行を生成 -->
+        </table>
+    </body>
+    
+</html>

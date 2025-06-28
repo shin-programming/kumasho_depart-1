@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     // ログアウト処理
     document.querySelector('.logout-button').addEventListener('click', function () {
         localStorage.removeItem(`isLoggedIn${classNumber}`);
-        window.location.href = '../home/home.html';
+        window.location.href = '../../home/home.html';
     });
 
     // 再読み込みボタン処理
@@ -96,8 +96,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                         fetch(gas_url)
                             .then(response => response.json())
                             .then(data => {
-                                // 商品数と完売数を更新
-                                document.getElementById("pd").textContent = data.length;
+                                // 完売数を更新
                                 document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
                             });
 
