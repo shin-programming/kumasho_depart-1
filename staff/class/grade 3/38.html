@@ -2,33 +2,40 @@
 <html lang="ja">
 
     <head>
-        <div id="className" data-className="3-8"></div>    <!-- クラスごとに変更 -->
-        <div id="classNumber" data-classnumber="38"></div>    <!-- クラスごとに変更 -->
+        <div id="className" data-className="3-8"></div>
+        <div id="classNumber" data-classnumber="38"></div>
         <meta charset="UTF-8">
-        <title>熊デパ　３－８　【えびす屋　希望】</title>    <!-- クラスごとに変更 -->
+        <title>熊デパ　３－８　【えびす屋】</title>
         <link rel="stylesheet" href="../class_style.css">
     </head>
 
     <body>
-        <script src="../class_script_3g.js"></script>    <!-- 学年ごとにjsファイルの変更 -->
+        <script src="../class_script_3g.js"></script>
+
         <table>
             <tr>
                 <th>
-                    <h1>３年８組　【えびす屋　希望】</h1>     <!-- クラスごとに変更 -->
+                    <h1 class="title">３年８組</h1><br>
                 </th>
+
                 <button class="logout-button">ログアウト</button>
                 <button class="reload-button">再読み込み</button>
             </tr>
+
             <tr class="pd-sold">
                 <th>
                     商品数：<span id="pd">0</span>／ 完売数：<span id="sold-out">0</span>
                 </th>
             </tr>
         </table>
+
         <div class="loading" id="loading">
             <div class="spinner"></div>
         </div>
-        <br>
+
+        <hr>
+        <h1>有限会社　えびす屋餅本舗</h1>
+
         <table class="product-table" id="product-table">
             <!-- JSでヘッダー・データ行を生成 -->
         </table>
