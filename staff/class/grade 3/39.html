@@ -10,16 +10,29 @@
     </head>
 
     <body>
-        <script src="../class_script_3g.js"></script>
 
         <table>
             <tr>
                 <th>
-                    <h1 class="title">３年９組</h1>
+                    <h1 class="class-title">３年９組</h1>
                 </th>
 
-                <button class="logout-button">ログアウト</button>
-                <button class="reload-button">再読み込み</button>
+                <button class="settings-button" id="settings-button">≡</button>
+
+                <!-- ここからモーダル表示用 -->
+                <div class="modal-overlay" id="modal-overlay">
+                    <div class="modal-box" id="modal-box">
+                        <h2>モーダル表示できたや～ん</h2>
+                        <p>でもなんかうまくいかんな</p>
+                        <button class="modal-close-button" id="modal-close-button">閉じる</button>
+                    </div>
+                </div>
+            </tr>
+
+            <tr>
+                <th>
+                    <h3 class="company-title">【株式会社 三国屋・AmeYa】</h3>
+                </th>
             </tr>
 
             <tr class="pd-sold">
@@ -34,20 +47,12 @@
         </div>
 
         <hr>
-
-        <table>
-            <tr class="table_title">
-                <th>株式会社　三国屋</th>
-            </tr>
-
-            <tr class="table_title">
-                <th>Ameya</th>
-            </tr>
-        </table>
         
         <table class="product-table" id="product-table">
             <!-- JSでヘッダー・データ行を生成 -->
         </table>
+
+        <script src="../class_script_3g.js"></script>
     </body>
     
 </html>

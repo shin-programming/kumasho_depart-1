@@ -1,14 +1,28 @@
+h1, h3 {
+    float: left;
+}
+
+.class-title {
+    margin: 0;
+}
+
+.company_title {
+    font-size: 170%;
+    text-align: left;
+    margin: 0;
+}
+
 body {
     background-color: #ffdbac;
     color: #000000;
     font-size: 155%;
 }
 
-.logout-button {
-    background: #ff4e4e;
-    color: #fff;
+.settings-button {    /* 三点リーダー */
+    background: #fffffff0;
+    color: #000;
     font-size: 32px;
-    padding: 18px 37px;
+    padding: 7px 18px 7px 18px;
     border-radius: 18px;
     transition: background 0.2s;
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
@@ -16,25 +30,8 @@ body {
     float: right;
 }
 
-.logout-button:hover {
-    background: #c92525;
-}
-
-.reload-button {
-    background: #4e51ff;
-    color: #fff;
-    font-size: 17px;
-    padding: 10px 7px;
-    border-radius: 7px;
-    transition: background 0.2s;
-    box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
-    align-self: flex-end;
-    float: right;
-    display: none;
-}
-
-.reload-button:hover {
-    background: #2530c9;
+.settings-button:hover {
+    background: #eeeeeee0;
 }
 
 .product-table {
@@ -126,19 +123,6 @@ body {
     }
 }
 
-h1 {
-    float: left;
-}
-
-.title {
-    margin: 0;
-}
-
-.table_title{
-    font-size: 170%;
-    text-align: left;
-}
-
 .pd-sold {
     float: left;
     font-size: larger;
@@ -164,4 +148,22 @@ h1 {
     width: 60px;
     height: 60px;
     animation: spin 1s linear infinite;
+}
+
+.modal-overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.67);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box{
+    background: #ffdbac;
+    padding: 1rem;
+    border-radius: 8px;
 }

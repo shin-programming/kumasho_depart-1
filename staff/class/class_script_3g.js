@@ -5,24 +5,32 @@ const classNumber = document.getElementById("classNumber").dataset.classnumber;
 console.log("デバッグ情報:");
 console.log(`className: ${className}`);
 console.log(`classNumber: ${classNumber}`);
+//ここからモーダル表示処理
+const overlay = document.getElementById('modal-overlay');
+
+document.getElementById('settings-button').onclick = () => {
+    overlay.style.display = 'flex';
+};
+
+document.getElementById('modal-close-button').onclick = () => {
+    overlay.style.display = 'none';
+};
+
+overlay.onclick = e => {
+    if (e.target === overlay) overlay.style.display = 'none';
+};
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
-    window.location.href = '../home/home.html';
+    window.location.href = '../../home/home.html';
 }
 
 // ページ描画後にイベント登録・データ取得
 window.addEventListener('DOMContentLoaded', async function () {
 
-    // ログアウト処理
-    document.querySelector('.logout-button').addEventListener('click', function () {
-        localStorage.removeItem(`isLoggedIn${classNumber}`);
-        window.location.href = '../../home/home.html';
-    });
-
-    // 再読み込みボタン処理
-    document.querySelector('.reload-button').addEventListener('click', function () {
-        window.location.reload();
+    // モーダル表示
+    document.querySelector('.settings-button').addEventListener('click', function () {
+        
     });
 
     // ローディング表示

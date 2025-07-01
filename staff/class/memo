@@ -3,6 +3,13 @@
 
     home.html, 39.html, class_script_3g.js, class_style.css　(このファイルのレイアウトを統一)
 
+    chrome book　画面ネイティブ比率　1366×768
+
+処理メモ用
+    ログアウト処理
+        localStorage.removeItem(`isLoggedIn${classNumber}`);
+        window.location.href = '../../home/home.html';
+
 企業一覧
 A（18ダイキ・23シガキ）
 B（24松合食品・25市川製茶）

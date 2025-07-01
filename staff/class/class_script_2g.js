@@ -9,7 +9,7 @@ console.log(`classNumber: ${classNumber}`);
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
-    window.location.href = '../home/home.html';
+    window.location.href = '../../home/home.html';
 }
 // ページ描画後にイベント登録・データ取得
 window.addEventListener('DOMContentLoaded', async function () {
