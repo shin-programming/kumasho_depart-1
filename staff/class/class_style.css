@@ -34,6 +34,30 @@ body {
     background: #eeeeeee0;
 }
 
+.modal-overlay {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show{
+    opacity: 1;
+}
+
+.modal-box {
+    background: #ffdbac;
+    padding: 1rem;
+    border-radius: 18px;
+}
+
 .product-table {
     width: 97%;
     margin-top: 24px;
@@ -148,22 +172,4 @@ body {
     width: 60px;
     height: 60px;
     animation: spin 1s linear infinite;
-}
-
-.modal-overlay{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.67);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-box{
-    background: #ffdbac;
-    padding: 1rem;
-    border-radius: 18px;
 }

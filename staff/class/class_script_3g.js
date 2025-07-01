@@ -7,17 +7,29 @@ console.log(`className: ${className}`);
 console.log(`classNumber: ${classNumber}`);
 //ここからモーダル表示処理
 const overlay = document.getElementById('modal-overlay');
+const ob = document.getElementById('settings-button');
+const mcb = document.getElementById('modal-close-button');
 
 document.getElementById('settings-button').onclick = () => {
     overlay.style.display = 'flex';
+
+    requestAnimationFrame(() => {
+        overlay.classList.add('show');
+    });
 };
 
-document.getElementById('modal-close-button').onclick = () => {
-    overlay.style.display = 'none';
+function hidemodal(){
+    overlay.classList.remove('show');
+    
+    overlay.addEventListener('transitionend', function(){
+        overlay.style.display = 'none';
+        overlay.removeEventListener('transitionend',handler);
+    })
 };
 
+document.getElementById('modal-close-button').onclick = hidemodal;
 overlay.onclick = e => {
-    if (e.target === overlay) overlay.style.display = 'none';
+    if (e.target === overlay) hidemodal();
 };
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
