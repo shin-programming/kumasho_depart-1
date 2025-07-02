@@ -7,8 +7,6 @@ console.log(`className: ${className}`);
 console.log(`classNumber: ${classNumber}`);
 //ここからモーダル表示処理
 const overlay = document.getElementById('modal-overlay');
-const ob = document.getElementById('settings-button');
-const mcb = document.getElementById('modal-close-button');
 
 document.getElementById('settings-button').onclick = () => {
     overlay.style.display = 'flex';
@@ -18,19 +16,19 @@ document.getElementById('settings-button').onclick = () => {
     });
 };
 
-function hidemodal(){
+document.getElementById('modal-close-button').onclick = () => {
     overlay.classList.remove('show');
-    
-    overlay.addEventListener('transitionend', function(){
-        overlay.style.display = 'none';
-        overlay.removeEventListener('transitionend',handler);
-    })
+
+    overlay.addEventListener('transitionend', function handler (e) {
+        
+        if (e.propertyName === 'opacity'){
+            overlay.style.display = 'none';
+            overlay.removeEventListener('transitionend', handler);
+        }
+        
+    }, { once: true });
 };
 
-document.getElementById('modal-close-button').onclick = hidemodal;
-overlay.onclick = e => {
-    if (e.target === overlay) hidemodal();
-};
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
