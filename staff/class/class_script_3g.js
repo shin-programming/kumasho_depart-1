@@ -8,13 +8,13 @@ console.log(`classNumber: ${classNumber}`);
 //ここからモーダル表示処理
 const overlay = document.getElementById('modal-overlay');
 
-document.getElementById('settings-button').onclick = () => {
+document.getElementById('point-button').onclick = () => {
     overlay.style.display = 'flex';
 
     requestAnimationFrame(() => {
         overlay.classList.add('show');
     });
-};
+};  
 
 document.getElementById('modal-close-button').onclick = () => {
     overlay.classList.remove('show');
@@ -25,10 +25,22 @@ document.getElementById('modal-close-button').onclick = () => {
             overlay.style.display = 'none';
             overlay.removeEventListener('transitionend', handler);
         }
-        
+
     }, { once: true });
 };
 
+document.getElementById('modal-overlay').onclick = () => {
+    overlay.classList.remove('show');
+
+    overlay.addEventListener('transitionend', function handler(e) {
+
+        if (e.propertyName === 'opacity') {
+            overlay.style.display = 'none';
+            overlay.removeEventListener('transitionend', handler);
+        }
+
+    }, { once: true });
+}
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
@@ -39,7 +51,7 @@ if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
 window.addEventListener('DOMContentLoaded', async function () {
 
     // モーダル表示
-    document.querySelector('.settings-button').addEventListener('click', function () {
+    document.querySelector('.point-button').addEventListener('click', function () {
         
     });
 
@@ -113,7 +125,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                         fetch(gas_url)
                             .then(response => response.json())
                             .then(data => {
-                                // 完売数を更新
+                                // 販売状況を更新
                                 document.getElementById("sold-out").textContent = data.filter(item => item.sales === "完売").length;
                             });
                     });
