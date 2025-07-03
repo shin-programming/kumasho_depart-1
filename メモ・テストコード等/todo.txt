@@ -1,0 +1,6 @@
+やりたいこと
+    cssを上から順番に並べ替えたい
+
+    home.html, 39.html, 39a.html, 39m.html class_script_3g.js, class_style.css　(このファイルのレイアウトを統一)
+
+    chrome book　画面ネイティブ比率　1366×768

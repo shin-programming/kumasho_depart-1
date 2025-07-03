@@ -244,6 +244,7 @@
                     p.preventDefault(); // フォームの標準の動作（ページ遷移）を止める
                     document.getElementById('loading').style.display = 'flex'; // ローディング画面（ぐるぐる）を表示する
                     const classValue = document.getElementById('class').value; // クラスの選択値を取得 例: "39"（3年9組）
+                    const classS = `${classValue.charAt(0)}-${classValue.charAt(1)}`;
                     const password = document.getElementById('password').value; // パスワードの入力値を取得 例: "furukawagumi"
                     const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_Ttxeg35Rwh1IJTX2ZFNzPyJ6ebHS5QpCQpfRDujqPU-S5XR9Ulv-Mn4z8oQd2yoe/exec'; // データ取得用のURL
                     
@@ -263,15 +264,16 @@
                             console.log("パスワードデバッグ情報:");
                             console.log(users);
                             console.log(found);
+                            console.log(`classS: ${classS}`);
                             console.log(`class: ${classValue}, password: ${password}`);
 
                             if (found !== undefined) { // 一致するユーザーがいた場合
                                 localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
-                                window.location.href = `../class/g${classValue.charAt(0)}/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
+                                window.location.href = `../class/g${classValue.charAt(0)}/${classS}/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
                                 // ローディング非表示は不要（ページ遷移するため）
                                 return; // ここで処理終了
-                            }
-                        }
+                            };
+                        };
 
                         // ログイン失敗時のみローディング画面を消す
                         document.getElementById('loading').style.display = 'none';
@@ -280,11 +282,11 @@
                             alert('ユーザーデータの取得に失敗しました'); // エラー表示
                         } else {
                             alert("パスワードが違います"); // パスワードが違う場合のエラー表示
-                        }
+                        };
                     } catch (err) { // 何かエラーが起きた場合
                         document.getElementById('loading').style.display = 'none'; // ローディング画面を消す
                         alert('サイトにアクセスできませんでした'); // エラー表示
-                    }
+                    };
                 });
 
                 // ページが表示されたときにローディング画面を必ず消す
@@ -295,8 +297,8 @@
                     for (let g = 1; g <= 3; g++) { // 学年ごとに 例: g=3
                         for (let c = 1; c <= 9; c++) { // 1組から9組まで 例: c=9
                             localStorage.removeItem(`isLoggedIn${g}${c}`); // ログイン情報を消す 例: localStorage["isLoggedIn39"] を削除
-                        }
-                    }
+                        };
+                    };
                 });
             </script>
         </div>

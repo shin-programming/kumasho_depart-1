@@ -1,0 +1,3 @@
+ログアウト処理
+        localStorage.removeItem(`isLoggedIn${classNumber}`);
+        window.location.href = '../../home/home.html';
