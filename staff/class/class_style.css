@@ -28,9 +28,58 @@ body {
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
     align-self: flex-end;
     float: right;
+    cursor: pointer;
 }
 
 .point-button:hover {
+    background: #eeeeeee0;
+}
+
+.modal-close-button {
+    background-color: #fffffff0;
+    color: #000;
+    font-size: 24px;
+    padding: 7px 18px 7px 18px;
+    border-radius: 18px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
+    cursor: pointer;
+    margin: 7px 0 7px 0;
+}
+
+.modal-close-button:hover {
+    background: #eeeeeee0;
+}
+
+.reload-button {
+    background-color: #fffffff0;
+    color: #000;
+    font-size: 24px;
+    padding: 7px 18px 7px 18px;
+    border-radius: 18px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
+    cursor: pointer;
+    margin: 7px 0 7px 0;
+}
+
+.reload-button:hover {
+    background: #eeeeeee0;
+}
+
+.logout-button {
+    background-color: #fffffff0;
+    color: #F00;
+    font-size: 24px;
+    padding: 7px 18px 7px 18px;
+    border-radius: 18px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
+    cursor: pointer;
+    margin: 7px 0 7px 0;
+}
+
+.logout-button:hover {
     background: #eeeeeee0;
 }
 

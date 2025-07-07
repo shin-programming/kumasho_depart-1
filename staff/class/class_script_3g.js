@@ -29,18 +29,14 @@ document.getElementById('modal-close-button').onclick = () => {
     }, { once: true });
 };
 
-document.getElementById('modal-overlay').onclick = () => {
-    overlay.classList.remove('show');
+document.getElementById('reload-button').onclick = () => {
+    window.location.reload();
+};
 
-    overlay.addEventListener('transitionend', function handler(e) {
-
-        if (e.propertyName === 'opacity') {
-            overlay.style.display = 'none';
-            overlay.removeEventListener('transitionend', handler);
-        }
-
-    }, { once: true });
-}
+document.getElementById('logout-button').onclick = () => {
+    localStorage.removeItem(`isLoggedIn${classNumber}`);
+    window.location.href = '../../home/home.html';
+};
 
 // ログイン時にlocalStorageへ 'isLoggedIn${classNumber}' を保存している前提
 if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
