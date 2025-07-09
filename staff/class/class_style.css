@@ -108,7 +108,7 @@ body {
     text-align: center;
 }
 
-.product-table {
+.company-tables {
     width: 97%;
     margin-top: 24px;
     text-align: left;
@@ -117,16 +117,16 @@ body {
     border-spacing: 0;
 }
 
-.product-table th:first-child {
+.company-tables th:first-child {
     border-radius: 18px 0 0 0;
 }
 
-.product-table th:last-child {
+.company-tables th:last-child {
     border-radius: 0 18px 0 0;
     border-right: 1px solid #ff6600;
 }
 
-.product-table th {
+.company-tables th {
     text-align: center;
     color: rgb(255, 255, 255);
     background: #ff6600;
@@ -138,7 +138,7 @@ body {
     padding: 10px 0;
 }
 
-.product-table td {
+.company-tables td {
     text-align: center;
     border-left: 1px solid #ff6600;
     border-bottom: 1px solid #ff6600;
@@ -147,27 +147,27 @@ body {
     padding: 10px 0;
 }
 
-.product-table td:last-child {
+.company-tables td:last-child {
     border-right: 1px solid #ff6600;
 }
 
-.product-table tr:last-child td:first-child {
+.company-tables tr:last-child td:first-child {
     border-radius: 0 0 0 18px;
 }
 
-.product-table tr:last-child td:last-child {
+.company-tables tr:last-child td:last-child {
     border-radius: 0 0 18px 0;
 }
 
-.product-table th:nth-child(1), .product-table td:nth-child(1) {
+.company-tables th:nth-child(1), .company-tables td:nth-child(1) {
     width: 40%;
 }
 
-.product-table th:nth-child(2), .product-table td:nth-child(2) {
+.company-tables th:nth-child(2), .company-tables td:nth-child(2) {
     width: 30%;
 }
 
-.product-table th:nth-child(3), .product-table td:nth-child(3) {
+.company-tables th:nth-child(3), .company-tables td:nth-child(3) {
     width: 30%;
 }
 

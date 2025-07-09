@@ -269,7 +269,7 @@
 
                             if (found !== undefined) { // 一致するユーザーがいた場合
                                 localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
-                                window.location.href = `../class/g${classValue.charAt(0)}/${classS}/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
+                                window.location.href = `../class/g${classValue.charAt(0)}/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
                                 // ローディング非表示は不要（ページ遷移するため）
                                 return; // ここで処理終了
                             };
