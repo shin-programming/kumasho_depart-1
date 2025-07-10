@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', async function () {
         ["3-6", ""],
         ["3-7", ""],
         ["3-8", "https://script.google.com/macros/s/AKfycbzPAqWNAJfEDddH0so-CXYUBPYEnS8EBT7ZvjFTP_g4PD2cFFzSHE4iKNq1IHZwqpBG/exec"],
-        ["3-9", "https://script.google.com/macros/s/AKfycbxbE5UJ-MwuEAcWXQCZ_H7WGyGZWxSECtSa8q7O1XU-xUOI72tIYY-YhGoJT-O7yk9ldQ/exec"],
+        ["3-9", "https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec"],
     ])
 
     // POST用URL: GASに販売状況を送信する際のエンドポイント
