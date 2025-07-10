@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', async function () {
         ["3-5", ""],
         ["3-6", ""],
         ["3-7", ""],
-        ["3-8", "https://script.google.com/macros/s/AKfycbzPAqWNAJfEDddH0so-CXYUBPYEnS8EBT7ZvjFTP_g4PD2cFFzSHE4iKNq1IHZwqpBG/exec"],
+        ["3-8", "https://script.google.com/macros/s/AKfycbzzR8gp5ANqc-RUguwx8bsACOxLZJYDGA3LjEzfGrFsZ1Rp63Hv1jrn9P3c1PjMlR2k/exec"],
         ["3-9", "https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec"],
     ])
 
