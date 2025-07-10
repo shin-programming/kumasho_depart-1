@@ -6,19 +6,13 @@ h1, h3 {
     margin: 0;
 }
 
-.company_title {
-    font-size: 170%;
-    text-align: left;
-    
-}
-
 body {
     background-color: #ffdbac;
     color: #000000;
     font-size: 155%;
 }
 
-.point-button {    /* 三点リーダー */
+.point-button {
     background: #fffffff0;
     color: #000;
     font-size: 32px;
@@ -108,13 +102,69 @@ body {
     text-align: center;
 }
 
-.company-tables {
-    width: 97%;
-    margin-top: 24px;
+.company-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 8px;
+}
+
+.company-header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    line-height: 1.1;
+}
+
+.company-title {
     text-align: left;
-    margin: 0 auto;
+    margin: 0 0 0 0;
+}
+
+.company-summary {
+    text-align: left;
+    margin: -8px 0 12px 0;
+    font-size: 1em;
+    font-weight: normal;
+    margin-left: 0.5em;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.product-table {
+    width: 97vw;
+    max-width: 97vw;
+    min-width: 0;
+    margin: 24px auto 0 auto;
+    text-align: left;
     border-collapse: separate;
     border-spacing: 0;
+    box-sizing: border-box;
+    table-layout: fixed;
+}
+
+.company-tables {
+    width: 97vw;
+    max-width: 97vw;
+    min-width: 0;
+    margin: 24px auto 0 auto;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-sizing: border-box;
+    table-layout: fixed;
+}
+
+.company-tables th, .company-tables td {
+    box-sizing: border-box;
+    padding: 10px 0;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .company-tables th:first-child {
@@ -160,11 +210,11 @@ body {
 }
 
 .company-tables th:nth-child(1), .company-tables td:nth-child(1) {
-    width: 40%;
+    width: 50%;
 }
 
 .company-tables th:nth-child(2), .company-tables td:nth-child(2) {
-    width: 30%;
+    width: 20%;
 }
 
 .company-tables th:nth-child(3), .company-tables td:nth-child(3) {
@@ -222,4 +272,11 @@ body {
     width: 60px;
     height: 60px;
     animation: spin 1s linear infinite;
+}
+
+@media (max-width: 900px) {
+    .company-tables {
+        width: 100vw;
+        max-width: 100vw;
+    }
 }

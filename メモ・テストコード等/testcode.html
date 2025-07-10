@@ -14,3 +14,94 @@
         console.log(`コンマあり：${number.toLocaleString()}`);
     </script>
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>熊デパ ３年９組</title>
+    <link rel="stylesheet" href="../class_style.css">
+    <!-- クラス名・番号を取得するためのダミー要素 -->
+    <div id="className" data-classname="3-9"></div>
+    <div id="classNumber" data-classnumber="39"></div>
+</head>
+
+<body>
+    <!-- ポイントボタン -->
+    <button class="point-button" id="point-button">≡</button>
+
+    <!-- モーダル -->
+    <div class="modal-overlay" id="modal-overlay" style="display:none;">
+        <div class="modal-box" id="modal-box">
+            <button class="reload-button" id="reload-button">再読み込み</button><br>
+            <button class="logout-button" id="logout-button">ログアウト</button><br>
+            <button class="modal-close-button" id="modal-close-button">閉じる</button>
+        </div>
+    </div>
+
+    <!-- ローディング -->
+    <div class="loading" id="loading" style="display:none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- 全体集計表示 -->
+    <div id="all-summary">
+        <span>商品数：6</span>　｜　<span>完売数：3</span>
+    </div>
+    <hr>
+
+    <!-- 企業ごとのテーブル表示 -->
+    <div id="company-tables">
+        <!-- ここにJSで企業ごとのブロックが生成されます。例として1社分だけ静的に記述 -->
+        <div class="company-block">
+            <h1>株式会社 三国屋<br></h1>
+            <div class="company-summary"><span>商品数：3</span>　｜　<span>完売数：1</span></div>
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>販売価格</th>
+                        <th>販売状況</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>３年９組</td>
+                        <td>¥3,900</td>
+                        <td class="status-on-sale">
+                            <input type="checkbox" class="status-checkbox" data-pdname="３年９組" data-company-index="0">
+                            <span class="status-label">販売中</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>３年９組（39個セット）</td>
+                        <td>¥152,100</td>
+                        <td class="status-soldout">
+                            <input type="checkbox" class="status-checkbox" data-pdname="３年９組（39個セット）"
+                                data-company-index="0" checked>
+                            <span class="status-label">完売</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>株式会社 三国屋</td>
+                        <td>¥593,190,000</td>
+                        <td class="status-on-sale">
+                            <input type="checkbox" class="status-checkbox" data-pdname="株式会社 三国屋"
+                                data-company-index="0">
+                            <span class="status-label">販売中</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 2社目以降も同様にブロックを追加 -->
+    </div>
+
+    <!-- JSファイルの読み込み -->
+    <script src="../class_script_3g.js"></script>
+</body>
+
+</html>

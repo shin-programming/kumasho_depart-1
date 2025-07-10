@@ -1,46 +1,40 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+    <head>
+        <div id="className" data-className="3-9"></div>
+        <div id="classNumber" data-classnumber="39"></div>
+        <meta charset="UTF-8">
+        <title>熊デパ　３年９組</title>
+        <link rel="stylesheet" href="../class_style.css">
+    </head>
 
-<head>
-    <div id="className" data-className="3-9"></div>
-    <div id="classNumber" data-classnumber="39"></div>
-    <meta charset="UTF-8">
-    <title>熊デパ　３年９組</title>
-    <link rel="stylesheet" href="../class_style.css">
-</head>
+    <body>
+        <table>
+            <tr>
+                <th>
+                    <h1 class="class-title">３年９組</h1>
+                </th>
 
-<body>
-    <table>
-        <tr>
-            <th>
-                <h1 class="class-title">３年９組</h1>
-            </th>
+                <button class="point-button" id="point-button">≡</button>
+            </tr>
+        </table>
 
-            <button class="point-button" id="point-button">≡</button>
-
-        </tr>
-    </table>
-
-    <!-- ここからモーダル表示用 -->
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal-box" id="modal-box">
-            <button class="reload-button" id="reload-button">再読み込み</button><br>
-            <button class="logout-button" id="logout-button">ログアウト</button><br>
-            <button class="modal-close-button" id="modal-close-button">閉じる</button>
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-box" id="modal-box">
+                <button class="reload-button" id="reload-button">再読み込み</button><br>
+                <button class="logout-button" id="logout-button">ログアウト</button><br>
+                <button class="modal-close-button" id="modal-close-button">閉じる</button>
+            </div>
         </div>
-    </div>
 
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-    </div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+        </div>
 
-    <hr>
-
-    <table class="company-tables" id="company-tables">
-        <!-- JSでヘッダー・データ行を生成 -->
-    </table>
-
-    <script src="../class_script_3g.js"></script>
-</body>
-
+        <div id="all-summary"></div>
+        <hr>
+        <div class="company-tables" id="company-tables"></div>
+        <script src="../class_script_3g.js"></script>
+    </body>
 </html>
