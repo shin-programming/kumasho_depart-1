@@ -55,13 +55,13 @@ window.addEventListener('DOMContentLoaded', async function () {
     // GAS_URLs: クラス名ごとに対応するGASのURLを格納するMapオブジェクト
     // 例: "3-9" → 3年9組用のGASエンドポイント
     const GAS_URLs = new Map([
-        ["3-1", ""],
-        ["3-2", ""],
-        ["3-3", ""],
-        ["3-4", ""],
-        ["3-5", ""],
-        ["3-6", ""],
-        ["3-7", ""],
+        ["3-1", "https://script.google.com/macros/s/AKfycbzCvCziusL-GdB26YWdwRA26I3kVF7eDJspK8Q2fN1wep6kS5to_8ategUERdPid97n/exec"],
+        ["3-2", "https://script.google.com/macros/s/AKfycbx1gjtu_aVq1YixIulMIwFrp75VlZTBvM3jgAn51TyIlG4G5XtQ3Nh0FguRPaj1vFH2XQ/exec"],
+        ["3-3", "https://script.google.com/macros/s/AKfycbzpFPkWr6y-SvFuTIBxrziAjdkal5L0Obn71NLbIuXIn-fWTgeq_cDwmfZOccZWbl-V/exec"],
+        ["3-4", "https://script.google.com/macros/s/AKfycbzgT9vXYIkH1OH-EA8FJKEMEKaSnhwJR1CbHUvz38HjIvPufr6_mLLr5SO70kb16_EFTg/exec"],
+        ["3-5", "https://script.google.com/macros/s/AKfycbxb3Xdz0Ffx4o_8fl9YhNE4dTf9F328g6P00Pv9BZ-K97CET33T7wQRw3XNLOovJkVK/exec"],
+        ["3-6", "https://script.google.com/macros/s/AKfycbwzpA861UFnp23VpBpsJi5QRfVJx7kaBKUujJcjidPmLSHiaOm0sJYgjvHjyesr6UmU/exec"],
+        ["3-7", "https://script.google.com/macros/s/AKfycbyUdq7pVqebVflENxobaxbFX9SL9XTEm-W52CdgILMvCK4-IjJaiAmljuL1Vnoj34EL/exec"],
         ["3-8", "https://script.google.com/macros/s/AKfycbzzR8gp5ANqc-RUguwx8bsACOxLZJYDGA3LjEzfGrFsZ1Rp63Hv1jrn9P3c1PjMlR2k/exec"],
         ["3-9", "https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec"],
     ])
