@@ -10,13 +10,13 @@
 <body>
   <header class="main-header">
     <div class="header-inner">
-      <h1>【Cafe Soluce】</h1>
+      <h1>【TATOMIYA　EZUKO】</h1>
       <p class="tagline">【キャッチコピー】</p>
     </div>
   </header>
 
   <section class="detail-section">
-    <img src="img/1-1/*.jpg" alt="店舗写真" />
+    <img src="img/1-1/Cafe.jpg" alt="店舗写真" />
     <h2>店舗紹介</h2>
     <p>
       【PR文１】<br>
@@ -27,21 +27,21 @@
     <center>
     <div class="product-card-list">
       <div class="product-card">
-        <img src="img/1-1/*.jpg" alt="おすすめ１">
+        <img src="img/1-1/Cafe01.jpg" alt="おすすめ１">
         <div class="product-card-body">
           <h3>【おすすめ商品１】</h3>
           <p class="product-price">【値段】</p>
         </div>
       </div>
       <div class="product-card">
-        <img src="img/1-1/*.jpg" alt="おすすめ２">
+        <img src="img/1-1/Cafe02.jpg" alt="おすすめ２">
         <div class="product-card-body">
           <h3>【おすすめ商品２】</h3>
           <p class="product-price">【値段】</p>
         </div>
       </div>
       <div class="product-card">
-        <img src="img/1-1/*.jpg" alt="おすすめ３">
+        <img src="img/1-1/Cafe03.jpg" alt="おすすめ３">
         <div class="product-card-body">
           <h3>【おすすめ商品３】</h3>
           <p class="product-price">【値段】</p>
@@ -50,7 +50,7 @@
     </div>
 
     <!-- 販売状況ボタン -->
-    <button class="show-status" data-class="1-1" data-company="Cafe Soluce">全商品の販売状況はこちら</button>
+    <button class="show-status" data-class="1-1">この店舗の全商品を見る</button>
 
     <!-- モーダルウィンドウ -->
     <div id="modal" class="hidden">
@@ -66,51 +66,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBody = document.getElementById('modal-body');
   const modalClose = document.getElementById('modal-close');
 
-  const companyPageMap = {
-    "TAKOMIYA EZUKO": "1-1-EZUKO.html",
-    "Cafe Soluce": "1-1-Cafe.html"
-    // 必要に応じてクラス別で編集
-  };
+  // モーダルの企業別表示のための企業名取得
+  const targetCompanyName = "TATOMIYA EZUKO";
 
   document.querySelectorAll('.show-status').forEach(button => {
     button.addEventListener('click', () => {
-      const className = button.getAttribute('data-class');
-      const companyName = button.getAttribute('data-company');
-      const targetPage = companyPageMap[companyName];
-
-      // ページ遷移に対応（別ページを開く用途）
-      if (targetPage) {
-        window.location.href = targetPage;
-        return; // 遷移後はこのページの処理を続けない
-      }
-
-      // モーダル表示処理（企業ページがない場合）
       modal.classList.remove('hidden');
       document.body.classList.add('modal-open');
       modalBody.innerHTML = '読み込み中...';
 
-      const Gas_Url = "https://script.google.com/macros/s/AKfycbzrGDAfgsDU5wQl3wW6QzokWE7Sm3YnM-n3IR9RX90OlNoWmCnH7zyV6jk7MnsWBK8M/exec?sheet=1-1"
+      const Gas_Url = "https://script.google.com/macros/s/AKfycbzrGDAfgsDU5wQl3wW6QzokWE7Sm3YnM-n3IR9RX90OlNoWmCnH7zyV6jk7MnsWBK8M/exec";
       fetch(Gas_Url)
         .then(response => response.json())
         .then(data => {
-          let companies = [];
-          let currentCompany = null;
+          let currentCompany = "";
+          const matchedProducts = [];
 
           data.forEach(item => {
             if (item.company_name) {
-              currentCompany = {
-                company_name: item.company_name,
-                products: []
-              };
-              companies.push(currentCompany);
-            } else if (item.pdname && currentCompany) {
-              currentCompany.products.push(item);
+              currentCompany = item.company_name;
+            } else if (currentCompany === targetCompanyName && item.pdname) {
+              matchedProducts.push(item);
             }
           });
 
-          modalBody.innerHTML = companies.map(company => {
-            const companyHeader = `<h3 style="margin-top: 1em;">${company.company_name}</h3>`;
-            const productList = company.products.map(item => {
+          if (matchedProducts.length > 0) {
+            const companyHeader = `<h3 style="margin-top: 1em;">${targetCompanyName}</h3>`;
+            const productList = matchedProducts.map(item => {
               const isSoldOut = item.sales === "完売";
               return `<div class="item" style="margin-bottom: 16px;">
                 <strong>${item.pdname}</strong><br>
@@ -118,8 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 販売状況: <span style="color:${isSoldOut ? 'red' : 'black'};">${item.sales}</span>
               </div>`;
             }).join('');
-            return companyHeader + productList;
-          }).join('');
+            modalBody.innerHTML = companyHeader + productList;
+          } else {
+            modalBody.innerHTML = '対象の企業の商品データが見つかりません。';
+          }
         })
         .catch(error => {
           console.error(error);
@@ -148,14 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+</center>
 
-    </center>
-    <a href="../store.html" class="back-link">← クラス一覧に戻る</a>
-  </section>
+<a href="../store.html" class="back-link">← クラス一覧に戻る</a>
+</section>
 
-  <footer>
-    <p>公式インスタグラム: <a href="https://www.instagram.com/kumasho.dept/" target="_blank">kumasho.dept</a></p>
-    <small>© 課題研究 アプリ開発班</small>
-  </footer>
+<footer>
+  <p>公式インスタグラム: <a href="https://www.instagram.com/kumasho.dept/" target="_blank">kumasho.dept</a></p>
+  <small>© 課題研究 アプリ開発班</small>
+</footer>
 </body>
 </html>

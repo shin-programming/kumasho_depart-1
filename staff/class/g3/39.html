@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja"></html>
+<html lang="ja">
     <head>
         <div id="class_name" data-class_name="3-9"></div>
         <div id="class_number" data-class_number="39"></div>
@@ -11,7 +11,18 @@
 
     <body>
         <div class="title_bar" id="title_bar">
-            <h1 class="class_title">３年９組</h1>
-            <button class="point_button" id="point_button">≡</button>
+            <h1 class="class_title">３年９組<button class="point_button" id="point_button">≡</button></h1>
+
         </div>
+
+        <div class="modal_overlay" id="modal_overlay">
+            <div class="modal_box" id="modal_box">
+                <button class="reload_button" id="reload_button">再読み込み</button><br>
+                <button class="logout_button" id="logout_button">ログアウト</button><br>
+                <button class="modal_close_button" id="modal_close_button">閉じる</button>
+            </div>
+        </div>
+
+        <script src="../class_script.js"></script>
     </body>
+</html>
