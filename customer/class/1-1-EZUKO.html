@@ -10,7 +10,7 @@
 <body>
   <header class="main-header">
     <div class="header-inner">
-      <h1>【TATOMIYA EZUKO】</h1>
+      <h1>【Cafe Soluce】</h1>
       <p class="tagline">【キャッチコピー】</p>
     </div>
   </header>
@@ -48,16 +48,17 @@
         </div>
       </div>
     </div>
-    <!-- 販売状況ボタン -->
-<button class="show-status" data-class="1-1">全商品の販売状況はこちら</button>
 
-<!-- モーダルウィンドウ -->
-<div id="modal" class="hidden">
-  <div id="modal-content">
-    <span id="modal-close" style="font-size: 1.5rem;">&times;</span>
-    <div id="modal-body">読み込み中...</div>
-  </div>
-</div>
+    <!-- 販売状況ボタン -->
+    <button class="show-status" data-class="1-1" data-company="Cafe Soluce">全商品の販売状況はこちら</button>
+
+    <!-- モーダルウィンドウ -->
+    <div id="modal" class="hidden">
+      <div id="modal-content">
+        <span id="modal-close" style="font-size: 1.5rem;">&times;</span>
+        <div id="modal-body">読み込み中...</div>
+      </div>
+    </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,47 +66,80 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBody = document.getElementById('modal-body');
   const modalClose = document.getElementById('modal-close');
 
-  // 販売状況ボタンのクリックでモーダル表示・データ取得
+  const companyPageMap = {
+    "TAKOMIYA EZUKO": "1-1-EZUKO.html",
+    "Cafe Soluce": "1-1-Cafe.html"
+    // 必要に応じてクラス別で編集
+  };
+
   document.querySelectorAll('.show-status').forEach(button => {
     button.addEventListener('click', () => {
-      const className = "1-1";
+      const className = button.getAttribute('data-class');
+      const companyName = button.getAttribute('data-company');
+      const targetPage = companyPageMap[companyName];
+
+      // ページ遷移に対応（別ページを開く用途）
+      if (targetPage) {
+        window.location.href = targetPage;
+        return; // 遷移後はこのページの処理を続けない
+      }
+
+      // モーダル表示処理（企業ページがない場合）
       modal.classList.remove('hidden');
       document.body.classList.add('modal-open');
       modalBody.innerHTML = '読み込み中...';
-      const Gas_Url = "https://script.google.com/macros/s/AKfycbxbLB9n0R4aWXw9ZSSH0zt3jPkEaKwXmXtfQB4WJAqOClEQA3AzWexMmoyU8GTd2CVxKg/exec?sheet=" + encodeURIComponent(className);
-      
-      console.log(className); // クラス名が正しいかを確認
-      console.log(Gas_Url); // URLが正しいかを確認
-      
+
+      const Gas_Url = "https://script.google.com/macros/s/AKfycbzrGDAfgsDU5wQl3wW6QzokWE7Sm3YnM-n3IR9RX90OlNoWmCnH7zyV6jk7MnsWBK8M/exec?sheet=1-1"
       fetch(Gas_Url)
         .then(response => response.json())
         .then(data => {
-          modalBody.innerHTML = data.map(item => {
-            const isSoldOut = item.sales === "完売";
-            return `<div class=\"item\" style=\"margin-bottom: 16px;\">`
-              + `<strong>${item.pdname}</strong><br>`
-              + `価格: ¥${item.price.toLocaleString()}<br>`
-              + `販売状況: <span style=\"color:${isSoldOut ? 'red' : 'black'};\">${item.sales}</span><br>`
-              + `</div>`;
+          let companies = [];
+          let currentCompany = null;
+
+          data.forEach(item => {
+            if (item.company_name) {
+              currentCompany = {
+                company_name: item.company_name,
+                products: []
+              };
+              companies.push(currentCompany);
+            } else if (item.pdname && currentCompany) {
+              currentCompany.products.push(item);
+            }
+          });
+
+          modalBody.innerHTML = companies.map(company => {
+            const companyHeader = `<h3 style="margin-top: 1em;">${company.company_name}</h3>`;
+            const productList = company.products.map(item => {
+              const isSoldOut = item.sales === "完売";
+              return `<div class="item" style="margin-bottom: 16px;">
+                <strong>${item.pdname}</strong><br>
+                価格: ¥${item.price.toLocaleString()}<br>
+                販売状況: <span style="color:${isSoldOut ? 'red' : 'black'};">${item.sales}</span>
+              </div>`;
+            }).join('');
+            return companyHeader + productList;
           }).join('');
         })
         .catch(error => {
+          console.error(error);
           modalBody.innerHTML = 'データの取得に失敗しました。';
         });
     });
   });
 
-  // モーダルを閉じる
   modalClose.addEventListener('click', () => {
     modal.classList.add('hidden');
     document.body.classList.remove('modal-open');
   });
+
   window.addEventListener('click', (e) => {
     if (e.target.id === 'modal') {
       modal.classList.add('hidden');
       document.body.classList.remove('modal-open');
     }
   });
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       modal.classList.add('hidden');
@@ -115,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-</center>
-
+    </center>
     <a href="../store.html" class="back-link">← クラス一覧に戻る</a>
   </section>
 
