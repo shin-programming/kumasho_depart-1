@@ -12,7 +12,18 @@
     <body>
         <div class="title_bar" id="title_bar">
             <h1 class="class_title">３年９組<button class="point_button" id="point_button">≡</button></h1>
+            
+            <div class="total_display" id="total_display"></div>
+        </div>
 
+        <div class="company_tables" id="company_tables">
+            <div class="company_total_display" id="company_total_display">
+                <div class="table_wrapper" id="table_wrapper">
+                    <table class="products_teble" id="products_teble">
+                        <tr></tr>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div class="modal_overlay" id="modal_overlay">
@@ -21,6 +32,10 @@
                 <button class="logout_button" id="logout_button">ログアウト</button><br>
                 <button class="modal_close_button" id="modal_close_button">閉じる</button>
             </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner" id="spinner"></div>
         </div>
 
         <script src="../class_script.js"></script>

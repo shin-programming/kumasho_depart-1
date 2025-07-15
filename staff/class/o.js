@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', async function () {
         ["3-6", "https://script.google.com/macros/s/AKfycbwzpA861UFnp23VpBpsJi5QRfVJx7kaBKUujJcjidPmLSHiaOm0sJYgjvHjyesr6UmU/exec"],
         ["3-7", "https://script.google.com/macros/s/AKfycbyUdq7pVqebVflENxobaxbFX9SL9XTEm-W52CdgILMvCK4-IjJaiAmljuL1Vnoj34EL/exec"],
         ["3-8", "https://script.google.com/macros/s/AKfycbzzR8gp5ANqc-RUguwx8bsACOxLZJYDGA3LjEzfGrFsZ1Rp63Hv1jrn9P3c1PjMlR2k/exec"],
-        ["3-9", "https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec"],
+        ["3-9", "https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec"]
     ])
 
     // POST用URL: GASに販売状況を送信する際のエンドポイント
@@ -125,6 +125,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                 // totalSoldout: 全企業の完売数合計
                 const totalProducts = companyList.reduce((sum, c) => sum + c.products.length, 0);
                 const totalSoldout = companyList.reduce((sum, c) => sum + c.products.filter(p => (p.sales || '').trim() === '完売').length, 0);
+
                 // 全体集計表示エリア取得・なければ作成
                 let summaryElem = document.getElementById('all-summary');
 
@@ -154,43 +155,45 @@ window.addEventListener('DOMContentLoaded', async function () {
                     const companyBlock = document.createElement('div');
                     companyBlock.className = 'company-block';
 
-                    // 企業ごとのリンクの作成
-                    const links = Object.assign(document.createElement('a'), {
-                        href: '#',
-                        target: '_self',
-                        textContent: company.name
-                    });
-
-                    links.setAttribute('id', 'links');
-                    links.style.cursor = 'pointer';
-
                     // 企業名（左寄せ）
                     const h1 = Object.assign(document.createElement('h1'),{
                         innerHTML: company.name + "<br>",
                         className: 'company-title',
                     });
 
-                    h1.setAttribute('id', `links-${companyIndex}`);  // <h1 id="links-[companyIndex]">
                     companyBlock.appendChild(h1);
                     companyBlock.appendChild(links);
                     container.appendChild(companyBlock);
+
+                    // ここから
+
                     // 商品数・完売数（企業名の次の行に表示）
-                    const cSummary = document.createElement('div');
+                    const cSummary = document.createElement('div');    // cSummary = company_total_display
                     cSummary.className = 'company-summary';
                     cSummary.style.marginTop = '-8px'; // 行間を詰める
                     const cPd = company.products.length;
                     const cSold = company.products.filter(p => (p.sales||'').trim() === '完売').length;
                     cSummary.innerHTML = `<br><br><span>商品数：${cPd}</span>　｜　<span>完売数：${cSold}</span>`;
                     companyBlock.appendChild(cSummary);
+
+
                     // 商品テーブル（中央・幅可変）
                     const tableWrapper = document.createElement('div');
                     tableWrapper.className = 'table-wrapper';
                     const table = document.createElement('table');
                     table.className = 'product-table';
                     table.setAttribute('data-company-index', companyIndex);
-                    table.innerHTML = `<thead><tr><th>商品名</th><th>販売価格</th><th>販売状況</th></tr></thead><tbody></tbody>`;
+                    table.innerHTML = `<thead>
+                                            <tr>
+                                                <th>商品名</th>
+                                                <th>販売価格</th>
+                                                <th>販売状況</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>`;
                     const tbody = table.querySelector('tbody');
-
+                    
+                    // ここから！！！
                     company.products.forEach(item => {
                         const tr = document.createElement('tr');
                         let statusClass = '';

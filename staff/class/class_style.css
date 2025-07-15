@@ -4,11 +4,18 @@ body {
 
 .title_bar {
     /* タイトルバー */
-    margin-bottom: 10px;
-    border: 7px double #000;
-    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 100%;
+    width: auto;
+    padding: 1px 0px;
     background-color: #ffb75a;
     font-size: larger;
+    border-radius: 18px;
+    border: solid 7px #ff9100;
+}
+
+.class_title{
+    margin-left: 18px
 }
 
 .point_button {
@@ -22,6 +29,7 @@ body {
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
     cursor: pointer;
     float: right;
+    margin-right: 18px;
 }
 
 .point_button:hover {
@@ -40,6 +48,7 @@ body {
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
     cursor: pointer;
     margin: 7px 0 7px 0;
+    display: none;
 }
 
 .reload_button:hover {
@@ -58,6 +67,7 @@ body {
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
     cursor: pointer;
     margin: 7px 0 7px 0;
+    display: none;
 }
 
 .logout_button:hover {
@@ -76,6 +86,7 @@ body {
     box-shadow: 0 2px 6px rgba(78, 140, 255, 0.08);
     cursor: pointer;
     margin: 7px 0 7px 0;
+    display: none;
 }
 
 .modal_close_button:hover {
@@ -88,4 +99,36 @@ body {
     padding: 1rem;
     border-radius: 18px;
     text-align: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffffaa;
+    display: none;  /* flexに */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 8px solid #eee;
+    border-top: 8px solid #f39121;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
 }
