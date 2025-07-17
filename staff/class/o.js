@@ -8,6 +8,7 @@ console.log(`className: ${className}`);
 console.log(`classNumber: ${classNumber}`);
 // モーダルのオーバーレイ要素を取得
 const overlay = document.getElementById('modal-overlay');
+console.log(`overlay: ${overlay}`);
 
 // ポイントボタン押下時にモーダル表示
 document.getElementById('point-button').onclick = () => {
@@ -23,6 +24,9 @@ document.getElementById('modal-close-button').onclick = () => {
     overlay.classList.remove('show');
 
     overlay.addEventListener('transitionend', function handler (e) {
+        
+        console.log(`e: ${e}`);
+
         if (e.propertyName === 'opacity'){
             overlay.style.display = 'none';
             overlay.removeEventListener('transitionend', handler);
@@ -42,9 +46,9 @@ document.getElementById('logout-button').onclick = () => {
 };
 
 // ログインしていなければホームへ遷移
-if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
-    window.location.href = '../../home/home.html';
-};
+//if (!localStorage.getItem(`isLoggedIn${classNumber}`)) {
+    //window.location.href = '../../home/home.html';
+//};
 
 // ページ描画後の初期化処理
 window.addEventListener('DOMContentLoaded', async function () {
@@ -68,10 +72,10 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     // POST用URL: GASに販売状況を送信する際のエンドポイント
     // className（例: "3-9"）に対応するURLを取得
-    const gas_post_url = GAS_URLs.get(className);
+    const gas_post_url = GAS_URLs.get('3-9');
     // GET用URL: GASからデータを取得する際のエンドポイント
     // sheetパラメータにclassNameを付与
-    const gas_url = gas_post_url + "?sheet=" + encodeURIComponent(className)
+    const gas_url = gas_post_url + "?sheet=" + encodeURIComponent('3-9')
     // URL確認用ログ
     console.log(`gas_url: ${gas_url}`);
     console.log(`gas_post_url: ${gas_post_url}`);
@@ -177,7 +181,7 @@ window.addEventListener('DOMContentLoaded', async function () {
                     companyBlock.appendChild(cSummary);
 
 
-                    // 商品テーブル（中央・幅可変）
+                    // 商品テーブル（中央・幅可変）　　　　ここから
                     const tableWrapper = document.createElement('div');
                     tableWrapper.className = 'table-wrapper';
                     const table = document.createElement('table');
@@ -199,9 +203,29 @@ window.addEventListener('DOMContentLoaded', async function () {
                         let statusClass = '';
                         const pdname = (item.pdname || '').trim();
                         const isSoldout = (item.sales || '').trim() === '完売';
+
+
                         statusClass = isSoldout ? 'status-soldout' : 'status-on-sale';
-                        const checkbox = `<input type="checkbox" class="status-checkbox" data-pdname="${pdname}">`;
-                        tr.innerHTML = `<td>${pdname || '商品名が読み込めませんでした'}</td><td>¥${item.price ? Number(item.price).toLocaleString() : '商品価格が読み込めませんでした'}</td><td class="${statusClass}">${checkbox}<span class="status-label">${isSoldout ? '完売' : '販売中'}</span></td>`;
+
+                        const checkbox = `
+                        <input type="checkbox" class="status-checkbox" data-pdname="${pdname}">`;
+                        tr.innerHTML = `
+                        <td>
+                            ${pdname || '商品名が読み込めませんでした'}
+                        </td>
+
+                        <td>
+                            ¥${item.price ? Number(item.price).toLocaleString() : '商品価格が読み込めませんでした'}
+                        </td>
+
+                        <td class="${statusClass}">
+                            ${checkbox}
+
+                            <span class="status-label">
+                                ${isSoldout ? '完売' : '販売中'}
+                            </span>
+                        </td>
+                        `;
                         tr.querySelector('.status-checkbox').setAttribute('data-company-index', companyIndex);
                         if (isSoldout) tr.querySelector('.status-checkbox').checked = true;
                         tbody.appendChild(tr);

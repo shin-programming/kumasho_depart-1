@@ -32,13 +32,13 @@ document.getElementById('reload_button').onclick = () => {
 };
 
 // ログアウトボタンが押されたとき
-documentgetelementbyId('logout_button').onclick = () => {
-    localStorage.removeitem(`logged_${class_name}`);
+document.getElementById('logout_button').onclick = () => {
+    localStorage.removeitem(`logged_${class_number}`);
     window.location.href = '../../home/home.html';
 };
 
 // 不正アクセス防止
-if (!localStorage.getitem(`logged_${class_name}`)) {
+if (!localStorage.getItem(`logged_${class_number}`)) {
     alert('不正なアクセスです。ログインページに遷移します。');
     window.location.href = '../../home/home.html';
 };
@@ -98,11 +98,11 @@ window.addEventListener('DOMContentLoaded', async function() {
                 // 企業ごとの商品をまとめた配列
                 const products_by_company = [];
                 // 企業ごとの一時保存用オブジェクト
-                const now_company = null;
+                let now_company = null;
 
-                for (let c = 0; c < data.length; c++) {
+                for (let c = 0; c < json_data.length; c++) {
                     // json_data　1行分のデータを格納
-                    const json_data_row = data[c];
+                    const json_data_row = json_data[c];
 
                     // company_nameが現れたら新しい企業開始
                     if (json_data_row.company_name && json_data_row.company_name !== '') {
@@ -165,10 +165,21 @@ window.addEventListener('DOMContentLoaded', async function() {
                     company_block.appendChild(h1);
                     table_by_company.appendChild(company_block);
                     // 各企業ごとの商品数・完売数の集計
-                    const company_total_display = document.getElementById('company_total_display');
+                    let company_total_display = document.getElementById('company_total_display');
+
+                    if (!company_total_display) {
+                        company_total_display = this.document.createElement('div');
+                        company_total_display.id = 'company_total_display';
+                        const title_by_company = this.document.querySelector('h1');
+
+                        if (title_by_company && table_by_company.parentNode) {
+                            title_by_company.parentNode.insertBefore(company_total_display, title_by_company.nextSibling);
+                        } else {
+                            document.body.insertBefore(company_total_display, document.body.firstChild);
+                        };
+                    };
                     const company_total_products = company.products.length;
                     const company_total_soldout = company.products.filter(n_p => (n_p.sales || '').trim() === '完売').length;
-
                     company_total_display.innerHTML = `
                         <br><br>
                         <span>商品数：${company_total_products}</span>
@@ -179,7 +190,14 @@ window.addEventListener('DOMContentLoaded', async function() {
                     company_block.appendChild(company_total_display);
                     // 商品テーブル
                     const table_wrapper = document.getElementById('table_wrapper');
-                    const table = document.getElementById('table');
+                    let table = document.getElementById('products_table');
+
+                    if (table == null) {
+                        table = document.createElement('table');
+                        table.className = 'products_table';
+                        table.id = 'products_table';
+                    };
+
                     table.setAttribute('data_company_count', company_count);
 
                     table.innerHTML = `
@@ -196,11 +214,44 @@ window.addEventListener('DOMContentLoaded', async function() {
 
                     const tbody = table.querySelector('tbody');
 
-                    company.products.forEach(item => {    // itemは変更する可能性
+                    company.products.forEach(item => {
+                        const tr = document.getElementsByTagName('tr');
+                        let soldout_judgment = '';
+                        const product_name = (item.pdname || '').trim();
+                        const soldout = (item.sales || '').trim() === '完売';
+                        soldout_judgment = soldout ? 'soldout_label' : 'onsale_label';
+
+                        let checkbox = `
+                            <input type="checkbox" class="judgment_checkbox" id="judgment_checkbox" data-product_name="${product_name}">
+                        `.trim();
+
+                        tr.innerHTML = `
+                            <td>
+                                ${product_name || '【商品名】'}
+                            </td>
+
+                            <td>
+                                ¥${item.price ? Number(item.price).toLocaleString() : '【販売価格】'}
+                            </td>
+
+                            <td class="${soldout_judgment}" id="${soldout_judgment}">
+                                ${checkbox}
+
+                                <span class="judgment_labels" id="judgment_labels">
+                                    ${soldout ? '完売' : '販売中'}
+                                </span>
+                            </td>
+                        `.trim();
+                        
+                        
+
+
+                        checkbox.dataset.product_name = item.pdname.trim();   // pdnameはproduct_nameの可能性
+                        checkbox.checked = soldout;
+
 
                     });
                 });
-                
             })
 
             .finally(() => {

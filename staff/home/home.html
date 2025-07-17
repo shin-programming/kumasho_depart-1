@@ -273,7 +273,7 @@
                         console.log(`class: ${classValue}, password: ${password}`);
 
                         if (found !== undefined) { // 一致するユーザーがいた場合
-                            localStorage.setItem(`isLoggedIn${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["isLoggedIn39"] = "true"
+                            localStorage.setItem(`logged_${classValue}`, 'true'); // ログイン状態を保存（ブラウザに記録） 例: localStorage["logged_39"] = "true"
                             window.location.href = `../class/g${classValue.charAt(0)}/${classValue}.html`; // クラスごとのページに移動する 例: ../class/39.html
                             // ローディング非表示は不要（ページ遷移するため）
                             return; // ここで処理終了
@@ -301,7 +301,7 @@
                 // 1年: 11~19, 2年: 21~29, 3年: 31~39 のログイン情報を削除（毎回リセット）
                 for (let g = 1; g <= 3; g++) { // 学年ごとに 例: g=3
                     for (let c = 1; c <= 9; c++) { // 1組から9組まで 例: c=9
-                        localStorage.removeItem(`isLoggedIn${g}${c}`); // ログイン情報を消す 例: localStorage["isLoggedIn39"] を削除
+                        localStorage.removeItem(`logged_${g}${c}`); // ログイン情報を消す 例: localStorage["logged_39"] を削除
                     };
                 };
             });
