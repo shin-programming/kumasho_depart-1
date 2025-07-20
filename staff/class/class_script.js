@@ -48,6 +48,8 @@ window.addEventListener('DOMContentLoaded', async function() {
         ['3-9', 'https://script.google.com/macros/s/AKfycbw5dUn9N6EaJjr5CbIJR9In9rY4t0Ute7Img5oNuLoD3y18kMRh2alcX2OaT9K7xxDqTQ/exec']
     ]);
 
+    console.log(all_gas_url);
+
     // get用とpost用のgasURLを変数に格納
     const gas_url_post = all_gas_url.get(class_name);
     const gas_url_get = gas_url_post + '?sheet=' + encodeURIComponent(class_name);
