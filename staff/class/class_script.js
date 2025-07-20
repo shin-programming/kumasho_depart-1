@@ -3,39 +3,8 @@ const class_number = document.getElementById('class_number').dataset.class_numbe
 console.log('デバッグ情報');
 console.log(`クラス名: ${class_name}`);
 console.log(`クラス番号: ${class_number}`);
+console.log(localStorage.getItem(`logged_${class_number}`));
 const modal_overlay = document.getElementById('modal_overlay');    // モーダルのオーバーレイ要素を取得
-
-// ポイントボタンが押されたとき
-document.getElementById('point_button').onclick = () => {
-    modal_overlay.style.display = 'flex';
-
-    requestAnimationFrame(() => {
-        modal_overlay.classList.add('show');
-    });
-};
-
-// モーダルの閉じるボタンが押されたとき
-document.getElementById('modal_close_button').onclick = () => {
-    modal_overlay.classList.remove('show');
-
-    modal_overlay.addEventListener('transitionend', function handler(e) {
-        if (e.propertyName === 'opacity') {
-            modal_overlay.style.display = 'none';
-            modal_overlay.removeEventListener('transitionend', handler);
-        };
-    }, { once: true });
-};
-
-// リロードボタンが押されたとき
-document.getElementById('reload_button').onclick = () => {
-    window.location.reload();
-};
-
-// ログアウトボタンが押されたとき
-document.getElementById('logout_button').onclick = () => {
-    localStorage.removeitem(`logged_${class_number}`);
-    window.location.href = '../../home/home.html';
-};
 
 // 不正アクセス防止
 if (!localStorage.getItem(`logged_${class_number}`)) {
@@ -262,3 +231,35 @@ window.addEventListener('DOMContentLoaded', async function() {
         window.location.href = '../../home/home.html';
     };
 });
+
+// ポイントボタンが押されたとき
+document.getElementById('point_button').onclick = () => {
+    modal_overlay.style.display = 'flex';
+
+    requestAnimationFrame(() => {
+        modal_overlay.classList.add('show');
+    });
+};
+
+// モーダルの閉じるボタンが押されたとき
+document.getElementById('modal_close_button').onclick = () => {
+    modal_overlay.classList.remove('show');
+
+    modal_overlay.addEventListener('transitionend', function handler(e) {
+        if (e.propertyName === 'opacity') {
+            modal_overlay.style.display = 'none';
+            modal_overlay.removeEventListener('transitionend', handler);
+        };
+    }, { once: true });
+};
+
+// リロードボタンが押されたとき
+document.getElementById('reload_button').onclick = () => {
+    window.location.reload();
+};
+
+// ログアウトボタンが押されたとき
+document.getElementById('logout_button').onclick = () => {
+    localStorage.removeitem(`logged_${class_number}`);
+    window.location.href = '../../home/home.html';
+};
